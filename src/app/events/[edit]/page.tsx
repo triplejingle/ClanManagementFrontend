@@ -23,11 +23,11 @@ export default function Page() {
             <div className="mt-6 flex flex-row flex-wrap mx-auto gap-x-6">
                 <NullableDateTimePicker
                     label={"Start Date/time"}
-                    name={"startDate"}
+                    name={"startdate"}
                 />
                 <NullableDateTimePicker
                     label={"End Date/time"}
-                    name={"endDate"}
+                    name={"enddate"}
                 />
             </div>
         </div>

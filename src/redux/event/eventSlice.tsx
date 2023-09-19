@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-import {createEvent, fetchEvents} from "@/redux/event/eventThunks";
+import {createEvent, fetchEvents, updateEvent} from "@/redux/event/eventThunks";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {Event} from '@/domain/event'
 
@@ -37,6 +37,19 @@ export const eventSlice = createSlice({
         })
         builder.addCase(fetchEvents.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
+        })
+        builder.addCase(updateEvent.fulfilled, (state, action)=>{
+            const updatedEvent = action.payload;
+            console.log("updated event", updatedEvent)
+            state.status= SUCCESS_STATUS;
+            var newEvents = state.events.filter(event=>event.eventid!=updatedEvent.eventid);
+            state.events = [...newEvents, updatedEvent]
+        })
+        builder.addCase(updateEvent.pending, (state, action)=>{
+            state.status= LOADING_STATUS;
+        })
+        builder.addCase(updateEvent.rejected, (state, action)=>{
+            state.status=FAILURE_STATUS;
         })
     }
 })

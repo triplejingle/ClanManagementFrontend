@@ -2,21 +2,20 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import eventSlice from "@/redux/event/eventSlice";
 
 
-
-const reducers =combineReducers({
+const reducers = combineReducers({
     event: eventSlice
 })
 
 export const store = configureStore({
-    reducer:{
-        reducers
-    },
+        reducer: {
+            reducers
+        },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
 
                 serializableCheck: false,
             }),
-}
+    }
 )
 
 

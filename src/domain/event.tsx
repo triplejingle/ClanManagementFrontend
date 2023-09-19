@@ -3,8 +3,8 @@ import {date, InferType} from "yup";
 
 export  const eventSchema = yup.object().shape({
     eventcode: yup.string().nullable().default(""),
-    startDate: date().required(),
-    endDate: date().required(),
+    startdate: date().required(),
+    enddate: date().required(),
     name: yup.string().required(),
     eventid: yup.number().nullable()
 })

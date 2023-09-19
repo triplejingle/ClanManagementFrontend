@@ -4,7 +4,7 @@ type BaseLabelProps ={
     label:string;
     name: string;
 }
-export default function ({label,name} : BaseLabelProps){
+export default function BaseLabel({label,name} : BaseLabelProps){
 
 
     return (

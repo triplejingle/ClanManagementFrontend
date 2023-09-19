@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {EventService} from "@/services/EventService";
 import {Event} from '@/domain/event'
+
 const eventService = new EventService();
 export const createEvent = createAsyncThunk(
     'event/create',
@@ -16,25 +17,26 @@ export const createEvent = createAsyncThunk(
 )
 export const fetchEvents = createAsyncThunk(
     'event/fetch',
-    async (customerId:string, thunkApi)=>{
-        const response = await eventService.fetchEvents(customerId);
+    async ( )=>{
+        return await eventService.fetchEvents()
+    }
+)
 
-        if(response!=null){
+export const updateEvent = createAsyncThunk(
+    'event/update',
+    async (event:Event, thunkApi) =>{
+        var response  = await eventService.updateEvent(event);
+        if(response != null){
             return response
         }else{
             return thunkApi.rejectWithValue(response)
         }
     }
 )
-// export const fetchEvent = createAsyncThunk(
-//     'event/fetch',
-//     async (event: Event, thunkAPI)=>{
-//         const response =  await eventService.fetchEvent()
+
+// export const deleteEvent = createAsyncThunk(
+//     'event/delete',
+//     async (eventid:number, thunkAPI)=>{
+//         const response = await eventService.deleteEvent()
 //     }
-// )
-// export const editEvent = createAsyncThunk(
-//     'event/[edit]',
-//     async (event: Event, thunkAPI=>{
-//         const response = await eventService.editEvent(event);
-//     })
 // )

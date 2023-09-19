@@ -7,16 +7,16 @@ import {Event} from '@/domain/event'
 import {useEffect} from "react";
 
 import {fetchEvents} from "@/redux/event/eventThunks";
+import DeleteButton from "@/components/button/DeleteButton";
 
 export default function Page() {
     const events = useAppSelector((state) => state.reducers.event.events);
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchEvents("1234"))
+        dispatch(fetchEvents())
     }, [dispatch])
 
-    return (
-        <div className="px-4 sm:px-6 lg:px-8">
+    return (<div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
                     <h1 className="text-base font-semibold leading-6 text-white">Events</h1>
@@ -59,10 +59,13 @@ export default function Page() {
                                         {event.name}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.eventcode}</td>
-                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.startDate?.toString()}</td>
-                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.endDate?.toString()}</td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.startdate?.toString()}</td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.enddate?.toString()}</td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <LinkText text={"Edit event"} page={"events/" + event.eventid}/>
+                                    </td>
+                                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <DeleteButton />
                                     </td>
                                 </tr>
                             ))}
