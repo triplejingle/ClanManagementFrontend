@@ -22,7 +22,7 @@ export default function NullableInput({label, description, name}: NullableInputP
             />
         }
         <div className="mt-2">
-            <BaseInput name={name}/>
+            <BaseInput className={""} name={name}/>
         </div>
     </div>)
 }
