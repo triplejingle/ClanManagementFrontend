@@ -1,15 +1,15 @@
 import React from "react";
 import {useFormContext} from "react-hook-form";
-import BaseInput from "@/components/input/BaseInput";
+import BaseTextInput from "@/components/input/BaseTextInput";
 import BaseLabel from "@/components/text/BaseLabel";
 import BaseDescription from "@/components/text/BaseDescription";
 
-type NullableInputProps = {
+type NullableTextInputProps = {
     label: string;
     description?: string;
     name: string;
 }
-export default function NullableInput({label, description, name}: NullableInputProps) {
+export default function NullableTextInput({label, description, name}: NullableTextInputProps) {
 
     return (<div>
         <BaseLabel
@@ -22,7 +22,7 @@ export default function NullableInput({label, description, name}: NullableInputP
             />
         }
         <div className="mt-2">
-            <BaseInput className={""} name={name}/>
+            <BaseTextInput className={""} name={name}/>
         </div>
     </div>)
 }

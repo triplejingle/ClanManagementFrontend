@@ -3,10 +3,10 @@ import {date, InferType} from "yup";
 
 export  const eventSchema = yup.object().shape({
     eventcode: yup.string().nullable().default(""),
-    startdate: date().required(),
-    enddate: date().required(),
+    startdate: date().nullable(),
+    enddate: date().nullable(),
     name: yup.string().required(),
-    eventid: yup.number().nullable()
+    eventid: yup.number().transform((value) => Number.isNaN(value) ? null : value ).nullable()
 })
 
 export type Event = InferType<typeof eventSchema>

@@ -1,5 +1,5 @@
 export default class BaseClanManagementBackendService<T> {
-    serverUrl = "https://localhost:7248"//process.env.API_URL;
+    serverUrl = "https://eventmanagementcomponent.azurewebsites.net"//process.env.API_URL;
     axios = require('axios');
 
     async create(url: string, data: T): Promise<T> {

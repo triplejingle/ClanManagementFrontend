@@ -38,18 +38,18 @@ export const eventSlice = createSlice({
         builder.addCase(fetchEvents.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
-        builder.addCase(updateEvent.fulfilled, (state, action)=>{
+        builder.addCase(updateEvent.fulfilled, (state, action) => {
             const updatedEvent = action.payload;
             console.log("updated event", updatedEvent)
-            state.status= SUCCESS_STATUS;
-            var newEvents = state.events.filter(event=>event.eventid!=updatedEvent.eventid);
+            state.status = SUCCESS_STATUS;
+            var newEvents = state.events.filter(event => event.eventid != updatedEvent.eventid);
             state.events = [...newEvents, updatedEvent]
         })
-        builder.addCase(updateEvent.pending, (state, action)=>{
-            state.status= LOADING_STATUS;
+        builder.addCase(updateEvent.pending, (state, action) => {
+            state.status = LOADING_STATUS;
         })
-        builder.addCase(updateEvent.rejected, (state, action)=>{
-            state.status=FAILURE_STATUS;
+        builder.addCase(updateEvent.rejected, (state, action) => {
+            state.status = FAILURE_STATUS;
         })
     }
 })

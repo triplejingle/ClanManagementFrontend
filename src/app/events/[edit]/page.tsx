@@ -4,8 +4,8 @@ import 'moment/locale/de';
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import NullableDateTimePicker from "@/components/input/NullableDateTimePicker";
-import NullableInput from "@/components/input/NullableInput";
-import RequiredInput from "@/components/input/RequiredInput";
+import NullableTextInput from "@/components/input/NullableTextInput";
+import RequiredInput from "@/components/input/RequiredTextInput";
 
 export default function Page() {
 
@@ -15,7 +15,7 @@ export default function Page() {
                 label={"Event name"}
                 name={"name"}
             />
-            <NullableInput
+            <NullableTextInput
                 label={"Event code"}
                 description={"The code to join the event. Send this code to the participants."}
                 name={"eventcode"}

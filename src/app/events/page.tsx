@@ -53,19 +53,19 @@ export default function Page() {
                             </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-800">
-                            {events.map((event: Event) => (
+                            {events.length > 0 && events.map((event: Event) => (
                                 <tr key={event.eventid}>
                                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
                                         {event.name}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.eventcode}</td>
-                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.startdate?.toString()}</td>
-                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.enddate?.toString()}</td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.startdate?.toString().replace("T"," ")}</td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.enddate?.toString().replace("T"," ")}</td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <LinkText text={"Edit event"} page={"events/" + event.eventid}/>
                                     </td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <DeleteButton />
+                                        <DeleteButton/>
                                     </td>
                                 </tr>
                             ))}

@@ -1,6 +1,6 @@
 import CancelButton from "@/components/button/CancelButton";
 import SaveButton from "@/components/button/SaveButton";
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import * as yup from "yup"
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -15,7 +15,11 @@ type CreateFormLayoutProps = {
     schema: yup.ObjectSchema<any>;
 }
 export default function CreateFormLayout({title, description, children, onSubmit, schema}: CreateFormLayoutProps) {
-    const methods = useForm({resolver: yupResolver(schema)});
+    const methods = useForm({resolver: yupResolver(schema),defaultValues: {eventid:-1}});
+
+   // useEffect(()=>{
+   //     console.log("on submit changed")
+   // },[onSubmit])
 
     return (
         <FormProvider {...methods}>
