@@ -20,11 +20,13 @@ export default function Page() {
             <RequiredInput
                 label={"Event name"}
                 name={"name"}
+                autofocus={true}
             />
             <NullableTextInput
                 label={"Event code"}
                 description={"The code to join the event. Send this code to the participants."}
                 name={"eventcode"}
+
             />
             <div className="mt-6 flex flex-row flex-wrap mx-auto gap-x-6">
                 <NullableDateTimePicker

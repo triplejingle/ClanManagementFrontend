@@ -9,10 +9,12 @@ import {Bars3Icon, BellIcon, Cog6ToothIcon, XMarkIcon} from "@heroicons/react/24
 import {ChevronDownIcon, HomeIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 
 import ProvidersComponent from "@/app/ProvidersComponent";
+import {UserGroupIcon} from "@heroicons/react/24/solid";
 
 
 const navigation = [
-    {name: 'events', href: '/events', icon: HomeIcon, current: true}
+    {name: 'events', href: '/events', icon: HomeIcon, current: true},
+    {name: 'teams', href:'/teams', icon: UserGroupIcon, current:true}
 ]
 const teams = [
     {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
@@ -230,7 +232,7 @@ export default function RootLayout({
                     </div>
                 </div>
 
-                <div className="lg:pl-72">
+                <div className="lg:pl-72 max-h-full">
                     <div
                         className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                         <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -324,7 +326,7 @@ export default function RootLayout({
                         <div className="px-4 sm:px-6 lg:px-8 ">
                             <div className="bg-gray-900 rounded-lg">
                                 <div className="mx-auto max-w-7xl">
-                                    <div className="bg-gray-900 py-10">
+                                    <div className="bg-gray-900 py-10 ">
                                         {children}
                                     </div>
                                 </div>

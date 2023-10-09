@@ -7,7 +7,6 @@ export const createEvent = createAsyncThunk(
     'event/create',
     async (event: Event, thunkApi)=>{
         const response=  await eventService.createEvent(event)
-
         if(response != null){
             return response;
         }else {
@@ -34,9 +33,14 @@ export const updateEvent = createAsyncThunk(
     }
 )
 
-// export const deleteEvent = createAsyncThunk(
-//     'event/delete',
-//     async (eventid:number, thunkAPI)=>{
-//         const response = await eventService.deleteEvent()
-//     }
-// )
+export const deleteEvent = createAsyncThunk(
+    'event/delete',
+    async (eventId:number, thunkAPI)=>{
+        const response = await eventService.deleteEvent(eventId)
+        if(response!= null){
+            return response
+        }else{
+            return thunkAPI.rejectWithValue(response);
+        }
+    }
+)

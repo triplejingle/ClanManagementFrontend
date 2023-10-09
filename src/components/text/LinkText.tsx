@@ -6,7 +6,7 @@ interface LinkTextProps{
 export default function LinkText({page, text}: LinkTextProps){
 
 
-    return <Link href={page} className="text-indigo-400 hover:text-indigo-300">
+    return <Link href={page} className="text-indigo-400 hover:text-indigo-200">
         {text}
         </Link>
 }

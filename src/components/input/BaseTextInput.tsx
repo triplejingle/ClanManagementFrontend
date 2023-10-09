@@ -4,9 +4,10 @@ import React from "react";
 type BaseTextInputProps ={
     name:string;
     className?:string;
-    hidden?:boolean
+    hidden?:boolean;
+    autofocus?:boolean;
 }
-export default function BaseTextInput({name,className, hidden}: BaseTextInputProps){
+export default function BaseTextInput({name,className, hidden,autofocus}: BaseTextInputProps){
     const {register} = useFormContext()
     return (
         <input
@@ -14,8 +15,10 @@ export default function BaseTextInput({name,className, hidden}: BaseTextInputPro
             {...register(name)}
             type="text"
             name={name}
+
             id={name}
             className={className?className+" focus:outline-none bg-white/5 py-1.5":" focus:outline-none w-full rounded-md focus:border bg-white/5 py-1.5 text-white"}
+            autoFocus={autofocus}
         />
     )
 }

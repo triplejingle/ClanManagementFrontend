@@ -26,12 +26,21 @@ export default class BaseClanManagementBackendService<T> {
     }
 
     async update(url: string, data: T): Promise<T> {
-        console.log("sending data", data)
         return await this.axios.put(this.serverUrl.concat(url),
             data
         )
-            .then((response: number) => {
+            .then((response: any) => {
+                return response.data;
+            })
+            .catch((response: any) => {
                 return response;
+            })
+    }
+
+    async delete(url: string): Promise<number>{
+        return await this.axios.delete(this.serverUrl.concat(url))
+            .then((response: any) => {
+                return response.data;
             })
             .catch((response: any) => {
                 return response;

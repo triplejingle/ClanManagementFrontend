@@ -34,8 +34,9 @@ export default function NullableDateTimePicker({label,name}:NullableDateTimePick
             <BaseLabel
                 label={label}
                 name={name}
+
             />
-            <input  {...register(name)} className={"text-black"}/>
+            <input hidden {...register(name)} className={"text-black"}/>
             <DatePicker
                 className={"text-black rounded-md"}
                 showIcon={true}
