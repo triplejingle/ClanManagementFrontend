@@ -1,12 +1,14 @@
 import Link from "next/link";
-interface LinkTextProps{
+
+interface LinkTextProps {
     page: string;
-    text:string;
+    text: string;
 }
-export default function LinkText({page, text}: LinkTextProps){
+
+export default function LinkText({page, text}: LinkTextProps) {
 
 
     return <Link href={page} className="text-indigo-400 hover:text-indigo-200">
         {text}
-        </Link>
+    </Link>
 }

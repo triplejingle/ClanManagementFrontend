@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-interface CancelButtonProps{
+interface CancelButtonProps {
     page: string;
 }
-export default function CancelButton({page}: CancelButtonProps){
+
+export default function CancelButton({page}: CancelButtonProps) {
 
     return (
         <Link href={page}>
@@ -15,5 +16,5 @@ export default function CancelButton({page}: CancelButtonProps){
                 Cancel
             </button>
         </Link>
-     )
+    )
 }

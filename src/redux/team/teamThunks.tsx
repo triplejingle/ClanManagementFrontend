@@ -36,7 +36,7 @@ export const updateTeam = createAsyncThunk(
     async (data: Team, thunkAPI) => {
         let newTeam = {...data} as Team;
 
-        const response = await teamService.updateTeam(data.teamid,newTeam);
+        const response = await teamService.updateTeam(data.teamid as number,newTeam);
         if (response) {
             return response;
         } else {

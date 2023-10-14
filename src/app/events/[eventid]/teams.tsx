@@ -57,7 +57,8 @@ export default function Teams() {
                                 <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
                                     <Link href={eventid + "/" + team.teamid} className="flex gap-x-2">
                                         <span className="truncate text-gray-400">{team.name}</span>
-                                        <span className="invisible md:visible absolute md:relative text-gray-400">|</span>
+                                        <span
+                                            className="invisible md:visible absolute md:relative text-gray-400">|</span>
                                         <span
                                             className="invisible md:visible absolute md:relative whitespace-nowrap text-gray-400 ">Teamsize: 4</span>
                                     </Link>
@@ -67,11 +68,13 @@ export default function Teams() {
                         </div>
                         <Link
                             href={eventid + "/" + team.teamid}
-                             className="text-indigo-400 hover:text-indigo-200">
+                            className="text-indigo-400 hover:text-indigo-200">
                             {"Edit teams"}
                         </Link>
 
-                        <ChevronRightIcon className="invisible md:visible absolute md:relative h-5 w-5 flex-none text-gray-400" aria-hidden="true"/>
+                        <ChevronRightIcon
+                            className="invisible md:visible absolute md:relative h-5 w-5 flex-none text-gray-400"
+                            aria-hidden="true"/>
                         <DeleteButton deleteOnClick={() => deleteOnClick(team.teamid as number, team.name)}/>
                     </li>
 

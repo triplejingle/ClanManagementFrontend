@@ -17,17 +17,17 @@ export default function Layout({children}: LayoutProps) {
     const dispatch = useAppDispatch();
     const router = useRouter()
     const toastId = React.useRef(null);
-    const eventState = useAppSelector((state)=>state.reducers.event.status);
+    const eventState = useAppSelector((state) => state.reducers.event.status);
     const onSubmit = (data: Event) => {
         toastId.current = toast.info('Saving in progress, please wait...');
         dispatch(createEvent(data)).then((response: any) => {
-            if(eventState==SUCCESS_STATUS){
+            if (eventState == SUCCESS_STATUS) {
                 toast.update(toastId.current, {type: toast.TYPE.SUCCESS, autoClose: 5000, render: "Event created"});
                 router.push("/events")
             }
-           if(eventState == FAILURE_STATUS){
-               toast.update(toastId.current, {type: toast.TYPE.ERROR, autoClose: 5000, render: "Something went wrong"});
-           }
+            if (eventState == FAILURE_STATUS) {
+                toast.update(toastId.current, {type: toast.TYPE.ERROR, autoClose: 5000, render: "Something went wrong"});
+            }
         })
     }
 

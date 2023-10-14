@@ -12,7 +12,8 @@ type RequiredTextInput = {
     description?: string;
     name: string;
 }
- function RequiredInput({label, description, name}: RequiredTextInput) {
+
+function RequiredInput({label, description, name}: RequiredTextInput) {
     const {formState: {errors}} = useFormContext();
     const parent = useRef(null)
     useEffect(() => {
@@ -23,7 +24,7 @@ type RequiredTextInput = {
 
     return (<div ref={parent}>
             <BaseLabel
-                label={label+" *"}
+                label={label + " *"}
                 name={name}
             />
             {description &&
@@ -31,20 +32,20 @@ type RequiredTextInput = {
                     description={description}
                 />
             }
-            <div className="relative mt-2 rounded-md shadow-sm" >
+            <div className="relative mt-2 rounded-md shadow-sm">
                 <BaseTextInput
-                               name={name}
-                               className={errors[name]?
-                    "block w-full rounded-md border-1 py-1.5 pr-10 text-white ring-2  ring-red-500 focus:ring-2 focus:ring-red-900 sm:text-sm sm:leading-6":""}/>
-                {errors[name]&&<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                    <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+                    name={name}
+                    className={errors[name] ?
+                        "block w-full rounded-md border-1 py-1.5 pr-10 text-white ring-2  ring-red-500 focus:ring-2 focus:ring-red-900 sm:text-sm sm:leading-6" : ""}/>
+                {errors[name] && <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true"/>
                 </div>}
             </div>
             {errors[name] &&
                 <div className="rounded-md bg-red-50 p-4">
                     <div className="flex">
                         <div className="flex-shrink-0">
-                            <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+                            <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true"/>
                         </div>
                         <div className="ml-3">
                             <h3 className="text-sm font-medium text-red-800">This is required</h3>

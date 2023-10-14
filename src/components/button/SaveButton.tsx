@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function SaveButton(){
-
+export default function SaveButton() {
 
 
     return (
