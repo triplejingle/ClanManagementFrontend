@@ -40,9 +40,8 @@ export const eventSlice = createSlice({
         })
         builder.addCase(updateEvent.fulfilled, (state, action) => {
             const updatedEvent = action.payload;
-            console.log("updated event", updatedEvent)
             state.status = SUCCESS_STATUS;
-            var newEvents = state.events.filter(event => event.eventid != updatedEvent.eventid);
+            const newEvents = state.events.filter(event => event.eventid != updatedEvent.eventid);
             state.events = [...newEvents, updatedEvent]
         })
         builder.addCase(updateEvent.pending, (state, action) => {
@@ -62,7 +61,6 @@ export const eventSlice = createSlice({
         builder.addCase(deleteEvent.rejected, (state, action)=>{
             state.status = FAILURE_STATUS;
         })
-
     }
 })
 

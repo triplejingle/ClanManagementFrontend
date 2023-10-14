@@ -6,7 +6,6 @@ import * as yup from "yup"
 import BaseFormLayout from "@/components/form/BaseFormLayout";
 import {FormProvider, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { useRouter } from 'next/router'
 
 type EditFormLayoutProps = {
     title: string;
@@ -14,9 +13,10 @@ type EditFormLayoutProps = {
     children: React.ReactNode;
     onSubmit: (data: any) => void;
     schema: yup.ObjectSchema<any>;
-    defaultValues: {}
+    defaultValues: {};
+    returnUrl:string;
 }
-export default function EditFormLayout({title, description, children, onSubmit, schema, defaultValues}: EditFormLayoutProps) {
+export default function EditFormLayout({title, description, children, onSubmit, schema, defaultValues,returnUrl}: EditFormLayoutProps) {
     const methods = useForm({resolver: yupResolver(schema), defaultValues: defaultValues});
 
     return (
@@ -27,7 +27,7 @@ export default function EditFormLayout({title, description, children, onSubmit, 
                     description={description}
                     buttons={
                         <div className="mt-6 flex items-center justify-end gap-x-6">
-                            <CancelButton/>
+                            <CancelButton page={returnUrl}/>
                             <SaveButton/>
                         </div>
                     }

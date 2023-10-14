@@ -1,5 +1,5 @@
 export default class BaseClanManagementBackendService<T> {
-    serverUrl = "https://eventmanagementcomponent.azurewebsites.net"//process.env.API_URL;
+    serverUrl = "https://eventmanagementcomponent-dev.azurewebsites.net/"//process.env.API_URL;
     axios = require('axios');
 
     async create(url: string, data: T): Promise<T> {
@@ -30,7 +30,7 @@ export default class BaseClanManagementBackendService<T> {
             data
         )
             .then((response: any) => {
-                return response.data;
+                return response.data
             })
             .catch((response: any) => {
                 return response;
@@ -40,10 +40,10 @@ export default class BaseClanManagementBackendService<T> {
     async delete(url: string): Promise<number>{
         return await this.axios.delete(this.serverUrl.concat(url))
             .then((response: any) => {
-                return response.data;
+                return response.data
             })
             .catch((response: any) => {
-                return response;
+               return  response;
             })
     }
 }

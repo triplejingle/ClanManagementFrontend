@@ -1,16 +1,11 @@
 import React from "react";
-import {useAppDispatch} from "@/hooks/hooks";
-import {deleteEvent} from "@/redux/event/eventThunks";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface DeleteButtonProps{
-    id: number
-}
-export default function DeleteButton({id}: DeleteButtonProps){
-    const dispatch = useAppDispatch();
-    function deleteOnClick(){
-        dispatch(deleteEvent(id));
-    }
 
+    deleteOnClick: ()=>void;
+}
+export default function DeleteButton({deleteOnClick}: DeleteButtonProps){
     return (
         <button
             type="button"

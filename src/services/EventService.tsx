@@ -12,10 +12,10 @@ export class EventService extends BaseClanManagementBackendService<Event> {
     }
 
     async updateEvent(event: Event): Promise<Event> {
-        return this.update(this.url + event.eventid?.toString(), event);
+        return this.update(this.url +"/"+ event.eventid?.toString(), event);
     }
 
     async deleteEvent(id: number){
-        return this.delete(this.url+id);
+        return this.delete(this.url+"/"+id);
     }
 }

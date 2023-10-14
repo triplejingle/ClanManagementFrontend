@@ -1,6 +1,5 @@
 'use client'
 import './globals.css'
-import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 
 import React, {Fragment, useState} from "react";
@@ -9,12 +8,11 @@ import {Bars3Icon, BellIcon, Cog6ToothIcon, XMarkIcon} from "@heroicons/react/24
 import {ChevronDownIcon, HomeIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 
 import ProvidersComponent from "@/app/ProvidersComponent";
-import {UserGroupIcon} from "@heroicons/react/24/solid";
+import {ToastContainer} from "react-toastify";
 
 
 const navigation = [
-    {name: 'events', href: '/events', icon: HomeIcon, current: true},
-    {name: 'teams', href:'/teams', icon: UserGroupIcon, current:true}
+    {name: 'events', href: '/events', icon: HomeIcon, current: true}
 ]
 const teams = [
     {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
@@ -323,6 +321,7 @@ export default function RootLayout({
                     </div>
 
                     <main className="py-10 ">
+
                         <div className="px-4 sm:px-6 lg:px-8 ">
                             <div className="bg-gray-900 rounded-lg">
                                 <div className="mx-auto max-w-7xl">
@@ -332,7 +331,20 @@ export default function RootLayout({
                                 </div>
                             </div>
                         </div>
+
                     </main>
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                 </div>
             </div>
             </body>

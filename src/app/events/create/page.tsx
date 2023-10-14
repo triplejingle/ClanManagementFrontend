@@ -6,11 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import NullableDateTimePicker from "@/components/input/NullableDateTimePicker";
 import NullableTextInput from "@/components/input/NullableTextInput";
 import RequiredInput from "@/components/input/RequiredTextInput";
-import { useFormContext} from "react-hook-form";
+
 import BaseTextInput from "@/components/input/BaseTextInput";
 
 
 export default function Page() {
+
     return (
         <div>
             <BaseTextInput
@@ -20,7 +21,6 @@ export default function Page() {
             <RequiredInput
                 label={"Event name"}
                 name={"name"}
-                autofocus={true}
             />
             <NullableTextInput
                 label={"Event code"}

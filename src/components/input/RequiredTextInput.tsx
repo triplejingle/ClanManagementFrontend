@@ -1,3 +1,4 @@
+"use client"
 import {useFormContext} from "react-hook-form";
 import React, {useEffect, useRef} from "react";
 import BaseTextInput from "@/components/input/BaseTextInput";
@@ -10,14 +11,13 @@ type RequiredTextInput = {
     label: string;
     description?: string;
     name: string;
-    autofocus?:boolean
 }
-export default function RequiredInput({label, description, name, autofocus}: RequiredTextInput) {
+ function RequiredInput({label, description, name}: RequiredTextInput) {
     const {formState: {errors}} = useFormContext();
     const parent = useRef(null)
-
     useEffect(() => {
         parent.current && autoAnimate(parent.current)
+
     }, [parent])
 
 
@@ -32,8 +32,8 @@ export default function RequiredInput({label, description, name, autofocus}: Req
                 />
             }
             <div className="relative mt-2 rounded-md shadow-sm" >
-                <BaseTextInput name={name}
-                               autofocus={autofocus}
+                <BaseTextInput
+                               name={name}
                                className={errors[name]?
                     "block w-full rounded-md border-1 py-1.5 pr-10 text-white ring-2  ring-red-500 focus:ring-2 focus:ring-red-900 sm:text-sm sm:leading-6":""}/>
                 {errors[name]&&<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -55,3 +55,5 @@ export default function RequiredInput({label, description, name, autofocus}: Req
         </div>
     )
 }
+
+export default RequiredInput;

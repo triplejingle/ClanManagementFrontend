@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import eventSlice from "@/redux/event/eventSlice";
+import teamSlice from "@/redux/team/teamSlice";
 
 
 const reducers = combineReducers({
-    event: eventSlice
+    event: eventSlice,
+    team: teamSlice
 })
 
 export const store = configureStore({
@@ -12,7 +14,6 @@ export const store = configureStore({
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
-
                 serializableCheck: false,
             }),
     }
