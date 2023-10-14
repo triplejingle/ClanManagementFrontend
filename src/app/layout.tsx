@@ -38,8 +38,13 @@ export default function RootLayout({
     return (
         <ProvidersComponent>
             <html lang="en">
+            <head>
+            <meta name="description" content="Bingo application">
+            </meta>
+                <title>BE Active NL clan</title>
+            </head>
             <body className={inter.className}>
-            <title>BE Active NL clan</title>
+
             <div>
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
