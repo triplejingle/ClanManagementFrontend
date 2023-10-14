@@ -16,7 +16,7 @@ type LayoutProps = {
 export default function Layout({children}: LayoutProps) {
     const dispatch = useAppDispatch();
     const router = useRouter()
-    const toastId = React.useRef(null);
+    const toastId:any = React.useRef();
     const eventState = useAppSelector((state) => state.reducers.event.status);
     const onSubmit = (data: Event) => {
         toastId.current = toast.info('Saving in progress, please wait...');

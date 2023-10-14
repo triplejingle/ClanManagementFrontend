@@ -29,7 +29,7 @@ export default function Page() {
             dispatch(fetchEvents())
         }
     }, [eventState])
-    const toastId = React.useRef(null);
+    const toastId:any = React.useRef();
 
     function onSubmit(event: Event) {
         toastId.current = toast.info('Saving in progress, please wait...');

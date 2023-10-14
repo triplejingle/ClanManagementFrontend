@@ -18,7 +18,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     const teamState = useAppSelector((state) => state.reducers.team.status);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const toastId = React.useRef(null);
+    const toastId:any = React.useRef();
     useEffect(() => {
         if (teamState == IDLE_STATUS) {
             dispatch(fetchTeams());
@@ -26,6 +26,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     }, [teamState])
 
     function onSubmit(newData: Team) {
+
         toastId.current = toast.info('Saving in progress, please wait...');
         dispatch(updateTeam(newData)).then((response: any) => {
                 if (teamState == SUCCESS_STATUS) {

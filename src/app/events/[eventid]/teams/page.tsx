@@ -14,7 +14,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     const teamState = useAppSelector((state) => state.reducers.team.status);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const toastId = React.useRef(null);
+    const toastId:any = React.useRef();
 
     function onSubmit(newData: Team) {
         toastId.current = toast.info('Saving in progress, please wait...');

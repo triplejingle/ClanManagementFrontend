@@ -18,7 +18,7 @@ export default function Teams() {
     const teams =
         useAppSelector((state) => state.reducers.team.teams.filter(t => t.eventid == eventid));
     const teamsState = useAppSelector((state) => state.reducers.team.status);
-    const toastId = useRef(null);
+    const toastId:any = React.useRef();
 
     useEffect(() => {
         if (teamsState == IDLE_STATUS) {
