@@ -50,6 +50,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "^4.15.0"
+    "@types/react-datepicker": "^4.15.0",
+    "eslint": "^8.51.0"
   }
 }

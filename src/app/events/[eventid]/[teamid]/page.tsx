@@ -21,7 +21,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     const toastId = React.useRef(null);
     useEffect(() => {
         if (teamState == IDLE_STATUS) {
-            dispatch(fetchTeams(params.eventid));
+            dispatch(fetchTeams());
         }
     }, [teamState])
 
