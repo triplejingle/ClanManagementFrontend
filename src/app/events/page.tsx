@@ -4,7 +4,7 @@ import LinkText from "@/components/text/LinkText";
 import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 
 import {Event} from '@/domain/event'
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 
 import {deleteEvent, fetchEvents} from "@/redux/event/eventThunks";
 import DeleteButton from "@/components/button/DeleteButton";
@@ -19,17 +19,25 @@ export default function Page() {
         dispatch(fetchEvents())
     }, [])
 
-    const toastId:any = React.useRef();
+    const toastId: any = React.useRef();
 
 
     function deleteOnClick(id: number, eventName: string) {
         toastId.current = toast.info("Deleting in progress, please wait...")
         dispatch(deleteEvent(id)).then((response: any) => {
                 if (eventState == FAILURE_STATUS) {
-                    toastId.current = toast.update(toastId.current, {type: toast.TYPE.ERROR, autoClose: 5000, render: "Something went wrong"})
+                    toastId.current = toast.update(toastId.current, {
+                        type: toast.TYPE.ERROR,
+                        autoClose: 5000,
+                        render: "Something went wrong"
+                    })
                 }
                 if (eventState == SUCCESS_STATUS) {
-                    toastId.current = toast.update(toastId.current, {type: toast.TYPE.SUCCESS, autoClose: 5000, render: eventName + " deleted"})
+                    toastId.current = toast.update(toastId.current, {
+                        type: toast.TYPE.SUCCESS,
+                        autoClose: 5000,
+                        render: eventName + " deleted"
+                    })
                 }
             }
         )
