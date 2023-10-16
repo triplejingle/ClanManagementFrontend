@@ -21,6 +21,7 @@ export default function Page() {
 
     const toastId:any = React.useRef();
 
+
     function deleteOnClick(id: number, eventName: string) {
         toastId.current = toast.info("Deleting in progress, please wait...")
         dispatch(deleteEvent(id)).then((response: any) => {
