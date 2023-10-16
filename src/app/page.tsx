@@ -1,3 +1,4 @@
+'use client'
 import {useEffect} from "react";
 import {fetchEvents} from "@/redux/event/eventThunks";
 import {useAppDispatch} from "@/hooks/hooks";
