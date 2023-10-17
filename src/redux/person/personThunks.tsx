@@ -29,7 +29,7 @@ export const createPerson = createAsyncThunk(
         const response = await personService.createPerson(data.teamid,data.person);
         console.log(response)
         console.log("created")
-        if(response != null&&response.code==null){
+        if(response != null){
             return response;
         }else{
             return rejectWithValue(response);
@@ -41,7 +41,7 @@ export const deletePerson = createAsyncThunk(
     "persons/delete",
     async (id: number, {rejectWithValue})=>{
         const response = await personService.deletePerson(id);
-        if(response != null&&response.code==null){
+        if(response != null){
             return response;
         }else{
             return rejectWithValue(response)
