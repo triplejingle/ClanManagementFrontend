@@ -1,11 +1,13 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import eventSlice from "@/redux/event/eventSlice";
 import teamSlice from "@/redux/team/teamSlice";
+import personSlice from "@/redux/person/personSlice";
 
 
 const reducers = combineReducers({
     event: eventSlice,
-    team: teamSlice
+    team: teamSlice,
+    person: personSlice
 })
 
 export const store = configureStore({

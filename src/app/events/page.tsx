@@ -8,39 +8,33 @@ import React, {useEffect} from "react";
 
 import {deleteEvent, fetchEvents} from "@/redux/event/eventThunks";
 import DeleteButton from "@/components/button/DeleteButton";
-import {toast} from "react-toastify";
-import {FAILURE_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
+import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 
 export default function Page() {
     const events = useAppSelector((state) => state.reducers.event.events);
     const dispatch = useAppDispatch();
-    const eventState = useAppSelector(state => state.reducers.event.status);
+    const toastId: { current: any } = React.useRef();
+
     useEffect(() => {
         dispatch(fetchEvents())
     }, [])
 
-    const toastId: any = React.useRef();
-
-
-    function deleteOnClick(id: number, eventName: string) {
-        toastId.current = toast.info("Deleting in progress, please wait...")
-        dispatch(deleteEvent(id)).then((response: any) => {
-                if (eventState == FAILURE_STATUS) {
-                    toastId.current = toast.update(toastId.current, {
-                        type: toast.TYPE.ERROR,
-                        autoClose: 5000,
-                        render: "Something went wrong"
-                    })
-                }
-                if (eventState == SUCCESS_STATUS) {
-                    toastId.current = toast.update(toastId.current, {
-                        type: toast.TYPE.SUCCESS,
-                        autoClose: 5000,
-                        render: eventName + " deleted"
-                    })
-                }
+    function deleteOnClick(id: number, event: Event) {
+        IdleToast({toastId: toastId});
+        dispatch(deleteEvent(id)).then((test) => {
+            if (deleteEvent.fulfilled.type == test.type) {
+                SuccessToast({
+                    toastId: toastId,
+                    message: event.name + " deleted"
+                });
             }
-        )
+            if (deleteEvent.rejected.type == test.type) {
+                ErrorToast({
+                    toastId: toastId,
+                    message: "Something went wrong."
+                });
+            }
+        })
     }
 
     return (<div className="px-4 sm:px-6 lg:px-8">
@@ -99,7 +93,7 @@ export default function Page() {
                                     </td>
                                     <td className=" whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <DeleteButton
-                                            deleteOnClick={() => deleteOnClick(event.eventid as number, event.name)}/>
+                                            deleteOnClick={() => deleteOnClick(event.eventid as number, event)}/>
                                     </td>
                                 </tr>
                             ))}

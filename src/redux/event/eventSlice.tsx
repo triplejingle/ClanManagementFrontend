@@ -4,6 +4,9 @@ import {createEvent, deleteEvent, fetchEvents, updateEvent} from "@/redux/event/
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {Event} from '@/domain/event'
 
+import React from "react";
+
+
 interface EventState {
     status: string;
     events: Event[]
@@ -13,6 +16,7 @@ const initialState: EventState = {
     status: IDLE_STATUS,
     events: []
 }
+
 export const eventSlice = createSlice({
     name: 'event',
     initialState,
@@ -51,18 +55,20 @@ export const eventSlice = createSlice({
             state.status = FAILURE_STATUS;
         })
         builder.addCase(deleteEvent.fulfilled, (state, action)=>{
+            console.log("fulfilled")
             state.status = SUCCESS_STATUS;
             const filteredEvents = state.events.filter(e=>e.eventid!=action.payload);
             state.events = filteredEvents;
         })
         builder.addCase(deleteEvent.pending, (state, action)=>{
+            console.log( "idle")
           state.status = LOADING_STATUS;
         })
         builder.addCase(deleteEvent.rejected, (state, action)=>{
+            console.log("rejected")
             state.status = FAILURE_STATUS;
         })
     }
 })
-
 
 export default eventSlice.reducer

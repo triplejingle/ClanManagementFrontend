@@ -1,14 +1,15 @@
 import {ChevronRightIcon} from '@heroicons/react/20/solid'
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import Link from "next/link";
 import {useParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 import {deleteTeam, fetchTeams} from "@/redux/team/teamThunks";
-import {FAILURE_STATUS, IDLE_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
+import {IDLE_STATUS} from "@/redux/stateStatus";
 import Persons from "@/app/events/[eventid]/persons";
 import DeleteButton from "@/components/button/DeleteButton";
-import {toast} from "react-toastify";
 import LinkButton from "@/components/button/LinkButton";
+import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
+import {fetchPersons} from "@/redux/person/personThunks";
 
 
 export default function Teams() {
@@ -18,8 +19,11 @@ export default function Teams() {
     const teams =
         useAppSelector((state) => state.reducers.team.teams.filter(t => t.eventid == eventid));
     const teamsState = useAppSelector((state) => state.reducers.team.status);
-    const toastId:any = React.useRef();
+    const toastId: any = React.useRef();
 
+    useEffect(()=>{
+        dispatch(fetchPersons({eventid}))
+    },[])
     useEffect(() => {
         if (teamsState == IDLE_STATUS) {
             dispatch(fetchTeams());
@@ -27,16 +31,21 @@ export default function Teams() {
     }, [teamsState, dispatch])
 
     function deleteOnClick(id: number, teamName: string) {
-        toastId.current = toast.info("Deleting in progress, please wait...")
-        dispatch(deleteTeam(id)).then((response: any) => {
-                if (teamsState == FAILURE_STATUS) {
-                    toastId.current = toast.update(toastId.current, {type: toast.TYPE.ERROR, autoClose: 5000, render: "Something went wrong"})
-                }
-                if (teamsState == SUCCESS_STATUS) {
-                    toastId.current = toast.update(toastId.current, {type: toast.TYPE.SUCCESS, autoClose: 5000, render: teamName + " deleted"})
-                }
+        IdleToast({toastId: toastId});
+        dispatch(deleteTeam(id)).then((test) => {
+            if (deleteTeam.fulfilled.type == test.type) {
+                SuccessToast({
+                    toastId: toastId,
+                    message: teamName + " deleted"
+                });
             }
-        )
+            if (deleteTeam.rejected.type == test.type) {
+                ErrorToast({
+                    toastId: toastId,
+                    message: "Something went wrong."
+                });
+            }
+        })
     }
 
     return (

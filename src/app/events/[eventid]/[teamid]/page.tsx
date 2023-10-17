@@ -8,8 +8,9 @@ import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 import RequiredInput from "@/components/input/RequiredTextInput";
 import {fetchTeams, updateTeam} from "@/redux/team/teamThunks";
 import {useRouter} from "next/navigation";
-import {FAILURE_STATUS, IDLE_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
-import {toast} from "react-toastify";
+import {IDLE_STATUS} from "@/redux/stateStatus";
+import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
+import PersonsOverview from "@/app/events/[eventid]/[teamid]/personsOverview";
 
 
 export default function Page({params}: { params: { eventid: number, teamid: number } }) {
@@ -18,7 +19,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     const teamState = useAppSelector((state) => state.reducers.team.status);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const toastId:any = React.useRef();
+    const toastId: any = React.useRef();
     useEffect(() => {
         if (teamState == IDLE_STATUS) {
             dispatch(fetchTeams());
@@ -26,22 +27,23 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
     }, [teamState])
 
     function onSubmit(newData: Team) {
-
-        toastId.current = toast.info('Saving in progress, please wait...');
-        dispatch(updateTeam(newData)).then((response: any) => {
-                if (teamState == SUCCESS_STATUS) {
-                    toast.update(toastId.current, {type: toast.TYPE.SUCCESS, autoClose: 5000, render: "Team updated"});
-                    router.push("/events/" + params.eventid)
-                }
-                if (teamState == FAILURE_STATUS) {
-                    toast.update(toastId.current, {type: toast.TYPE.ERROR, autoClose: 5000, render: "Something went wrong"});
-                }
+        IdleToast({toastId: toastId});
+        dispatch(updateTeam(newData)).then((test) => {
+            if (updateTeam.fulfilled.type == test.type) {
+                SuccessToast({
+                    toastId: toastId,
+                    message: "Team updated"
+                });
+                router.push("/events/" + params.eventid)
             }
-        ).catch((response: any) => {
-            console.log(response)
-        });
+            if (updateTeam.rejected.type == test.type) {
+                ErrorToast({
+                    toastId: toastId,
+                    message: "Something went wrong."
+                });
+            }
+        })
     }
-
 
     if (!team)
         return <></>
@@ -58,9 +60,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
                 <div className={"flex flex-col space-y-5"}>
                     <RequiredInput label={"Team name"} name={"name"}/>
                 </div>
-                <div className="mt-6 flex flex-row flex-wrap  gap-x-6 ">
-
-                </div>
+                <PersonsOverview eventid={params.eventid} teamid={params.teamid}/>
             </div>
         </EditFormLayout>
     </>);

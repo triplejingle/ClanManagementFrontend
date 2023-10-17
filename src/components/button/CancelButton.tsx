@@ -13,7 +13,7 @@ export default function CancelButton({page}: CancelButtonProps) {
                 type="button"
                 className="text-sm font-semibold leading-6 text-white"
             >
-                Cancel
+                Back
             </button>
         </Link>
     )

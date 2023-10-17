@@ -327,7 +327,6 @@ export default function RootLayout({
                     </div>
 
                     <main className="py-10 ">
-
                         <div className="px-4 sm:px-6 lg:px-8 ">
                             <div className="bg-gray-900 rounded-lg">
                                 <div className="mx-auto max-w-7xl">
@@ -337,10 +336,9 @@ export default function RootLayout({
                                 </div>
                             </div>
                         </div>
-
                     </main>
                     <ToastContainer
-                        position="bottom-right"
+                        position="top-right"
                         autoClose={5000}
                         hideProgressBar={false}
                         newestOnTop={false}
