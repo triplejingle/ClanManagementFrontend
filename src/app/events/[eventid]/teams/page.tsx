@@ -27,7 +27,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
             if (createTeam.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot create team."
                 });
             }
         })

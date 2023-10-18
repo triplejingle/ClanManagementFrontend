@@ -42,7 +42,7 @@ export default function Teams() {
             if (deleteTeam.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot delete team. Team still contains data."
                 });
             }
         })

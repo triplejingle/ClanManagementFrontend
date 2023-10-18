@@ -9,13 +9,12 @@ interface fetchPersonProps{
 }
 export const fetchPersons = createAsyncThunk(
     'persons/fetch',
-    async (data:fetchPersonProps, thunkAPI) => {
-        const response = await personService.fetchPersons(data.eventid);
-
-        if (response) {
-            return response;
-        } else {
-            return thunkAPI.rejectWithValue(response);
+    async (data:fetchPersonProps, {rejectWithValue}) => {
+        try {
+            var response = await personService.fetchPersons(data.eventid);
+            return response
+        } catch (e) {
+            return rejectWithValue(e);
         }
     }
 )
@@ -26,13 +25,11 @@ interface createPersonProps{
 export const createPerson = createAsyncThunk(
     "persons/create",
     async (data:createPersonProps, {rejectWithValue})=>{
-        const response = await personService.createPerson(data.teamid,data.person);
-        console.log(response)
-        console.log("created")
-        if(response != null){
-            return response;
-        }else{
-            return rejectWithValue(response);
+        try {
+            const response = await personService.createPerson(data.teamid,data.person);
+            return response
+        } catch (e) {
+            return rejectWithValue(e);
         }
     }
 )
@@ -40,11 +37,11 @@ export const createPerson = createAsyncThunk(
 export const deletePerson = createAsyncThunk(
     "persons/delete",
     async (id: number, {rejectWithValue})=>{
-        const response = await personService.deletePerson(id);
-        if(response != null){
-            return response;
-        }else{
-            return rejectWithValue(response)
+        try {
+            const response = await personService.deletePerson(id);
+            return response
+        } catch (e) {
+            return rejectWithValue(e);
         }
     }
 )

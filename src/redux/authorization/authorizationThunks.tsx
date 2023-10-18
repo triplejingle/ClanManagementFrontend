@@ -6,11 +6,11 @@ const authorizationService = new AuthorizationService();
 export const fetchAuthorization = createAsyncThunk(
     'authorization/fetch',
     async (userId: string, {rejectWithValue})=>{
-        const response=  await authorizationService.fetchAuthorization(userId)
-        if(response != null){
-            return response;
-        }else {
-           return rejectWithValue(response)
+        try {
+            const response=  await authorizationService.fetchAuthorization(userId)
+            return response
+        } catch (e) {
+            return rejectWithValue(e);
         }
     }
 )

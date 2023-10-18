@@ -29,7 +29,7 @@ export default function Layout({children}: LayoutProps) {
             if (createEvent.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot create event."
                 });
             }
         })

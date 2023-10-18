@@ -38,7 +38,7 @@ export default function PersonsOverview({eventid, teamid}: PersonProps) {
             if (deletePerson.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot delete person."
                 });
             }
         })
@@ -57,7 +57,7 @@ export default function PersonsOverview({eventid, teamid}: PersonProps) {
             if (createPerson.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot add person still"
                 });
             }
         })

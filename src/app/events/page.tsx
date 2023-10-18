@@ -31,7 +31,7 @@ export default function Page() {
             if (deleteEvent.rejected.type == test.type) {
                 ErrorToast({
                     toastId: toastId,
-                    message: "Something went wrong."
+                    message: "Cannot delete. Event still contains data."
                 });
             }
         })
