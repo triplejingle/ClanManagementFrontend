@@ -62,18 +62,8 @@ export default function Teams() {
                 {teams.map((team) => (
                     <li key={team.teamid} className="relative flex items-center space-x-4 py-4">
                         <div className="min-w-0 flex-auto">
-                            <div className="flex items-center gap-x-3">
-                                <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
-                                    <Link href={eventid + "/" + team.teamid} className="flex gap-x-2">
-                                        <span className="truncate text-gray-400">{team.name}</span>
-                                        <span
-                                            className="invisible md:visible absolute md:relative text-gray-400">|</span>
-                                        <span
-                                            className="invisible md:visible absolute md:relative whitespace-nowrap text-gray-400 ">Teamsize: 4</span>
-                                    </Link>
-                                </h2>
-                            </div>
-                            <Persons teamid={team.teamid as number}/>
+
+                            <Persons team={team}/>
                         </div>
                         <Link
                             href={eventid + "/" + team.teamid}
