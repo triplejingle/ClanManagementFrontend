@@ -47,7 +47,7 @@ export function RootLayout({children}: RootLayoutProps) {
     }
     console.log(role)
     if(role.find(r=>r.name=="Admin")==undefined){
-        return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout</a>
+        return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout. Wait to get access or check your mail to verify your email.</a>
     }
 
     return (<div>
