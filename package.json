@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.11.0",
+    "@auth0/nextjs-auth0": "^3.2.0",
     "@formkit/auto-animate": "^0.8.0",
     "@headlessui/react": "^1.7.15",
     "@headlessui/tailwindcss": "^0.2.0",
