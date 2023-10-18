@@ -26,16 +26,18 @@ export default function Persons({team}: PersonProps) {
                 </h2>
             </div>
             <div
-                className={"mt-3 flex flex-row gap-x-2.5 text-xs leading-5 text-gray-400"}>
+                className={"mt-3 flex flex-row flex-wrap gap-x-2.5 text-xs leading-5 text-gray-400 "}>
                 {participants.map((person) => (
-                    <div className={"flex items-center gap-x-2.5 text-xs text-gray-400"}
+                    <div className={"flex items-center gap-x-2.5 text-xs text-gray-400 "}
                          key={person.name}>
                         <svg viewBox="0 0 2 2" className="h-2 w-2 flex-none fill-red-300">
                             <circle cx={1} cy={1} r={1}/>
                         </svg>
                         {person.name}
                     </div>
+
                 ))}
+
             </div>
         </div>
     )

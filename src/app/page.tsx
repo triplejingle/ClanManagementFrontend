@@ -20,8 +20,8 @@ export default function Home() {
 
 
     return (
-    <main >
-       Welcome {user?.name}
+    <main className={"ml-10"}>
+        <div>Welcome {user?.name}</div>
     </main>
   )
 }
