@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation";
 import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
 import {useDispatch} from "react-redux";
 import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
+import LinkText from "@/components/text/LinkText";
 
 const navigation = [
     {name: 'events', href: '/events', icon: HomeIcon, current: true}
@@ -37,16 +38,17 @@ export function RootLayout({children}: RootLayoutProps) {
             return
         dispatch(fetchAuthorization(user.sub as string));
     },[user])
-    if (isLoading)
-        return <></>
-    if (!user) {
-        router.push("/api/auth/login");
-        return <></>
-    }
-
-    if(role.find(r=>r.name=="Admin")==undefined){
-        return <>401 No Access allowed</>
-    }
+    console.log(user)
+    // if (isLoading)
+    //     return <></>
+    // if (!user) {
+    //     router.push("/api/auth/login");
+    //     return <></>
+    // }
+    // console.log(role)
+    // if(role.find(r=>r.name=="Admin")==undefined){
+    //     return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout</a>
+    // }
 
     return (<div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
