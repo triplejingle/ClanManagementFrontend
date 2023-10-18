@@ -13,15 +13,16 @@ export default function ProfileDropDown(){
     const {user, error, isLoading} = useUser();
     if(isLoading)
         return <></>
-
+    if(!user)
+        return <></>
 
     return ( <Menu as="div" className="relative">
         <Menu.Button className="-m-1.5 flex items-center p-1.5">
             <span className="sr-only">Open user menu</span>
             {user&&<img
                 className="h-8 w-8 rounded-full bg-gray-50"
-                src={user.picture}
-                alt={user.name}
+                src={user.picture!}
+                alt={user.name!}
             />}
             <span className="hidden lg:flex lg:items-center">
                       <span className="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
