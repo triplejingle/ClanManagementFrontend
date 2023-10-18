@@ -38,17 +38,17 @@ export function RootLayout({children}: RootLayoutProps) {
             return
         dispatch(fetchAuthorization(user.sub as string));
     },[user])
-    console.log(user)
-    // if (isLoading)
-    //     return <></>
-    // if (!user) {
-    //     router.push("/api/auth/login");
-    //     return <></>
-    // }
-    // console.log(role)
-    // if(role.find(r=>r.name=="Admin")==undefined){
-    //     return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout</a>
-    // }
+
+    if (isLoading)
+        return <></>
+    if (!user) {
+        router.push("/api/auth/login");
+        return <></>
+    }
+    console.log(role)
+    if(role.find(r=>r.name=="Admin")==undefined){
+        return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout</a>
+    }
 
     return (<div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
