@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import {Bars3Icon, BellIcon, Cog6ToothIcon, XMarkIcon} from "@heroicons/react/24/outline";
 import {HomeIcon, MagnifyingGlassIcon} from "@heroicons/react/20/solid";
@@ -6,6 +6,10 @@ import ProfileDropDown from "@/app/profileDropDown";
 import {ToastContainer} from "react-toastify";
 import {useUser} from "@auth0/nextjs-auth0/client";
 import {useRouter} from "next/navigation";
+
+import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
+import {useDispatch} from "react-redux";
+import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 
 const navigation = [
     {name: 'events', href: '/events', icon: HomeIcon, current: true}
@@ -22,18 +26,29 @@ function classNames(...classes: any[]) {
 type RootLayoutProps={
     children: React.ReactNode;
 }
-export function RootLayout({children }: RootLayoutProps){
+export function RootLayout({children}: RootLayoutProps) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const {user, error, isLoading} = useUser();
     const router = useRouter();
-    if(isLoading)
+    const dispatch = useAppDispatch();
+    const role= useAppSelector((state)=>state.reducers.authorization.roles);
+    useEffect(()=>{
+        if(!user)
+            return
+        dispatch(fetchAuthorization(user.sub as string));
+    },[user])
+    if (isLoading)
         return <></>
-    if(!user){
+    if (!user) {
         router.push("/api/auth/login");
         return <></>
     }
 
-    return ( <div>
+    if(role.find(r=>r.name=="Admin")==undefined){
+        return <>401 No Access allowed</>
+    }
+
+    return (<div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
                     <Transition.Child
