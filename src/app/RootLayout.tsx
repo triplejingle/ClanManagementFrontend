@@ -34,9 +34,9 @@ export function RootLayout({children}: RootLayoutProps) {
     const dispatch = useAppDispatch();
     const role= useAppSelector((state)=>state.reducers.authorization.roles);
     useEffect(()=>{
-        if(!user)
-            return
-        dispatch(fetchAuthorization(user.sub as string));
+        if(user) {
+            dispatch(fetchAuthorization(user.sub as string));
+        }
     },[user])
 
     if (isLoading)
@@ -45,7 +45,9 @@ export function RootLayout({children}: RootLayoutProps) {
         router.push("/api/auth/login");
         return <></>
     }
-    console.log(role)
+    if(role.length==0)
+        return <></>
+
     if(role.find(r=>r.name=="Admin")==undefined){
         return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout. Wait to get access or check your mail to verify your email.</a>
     }
