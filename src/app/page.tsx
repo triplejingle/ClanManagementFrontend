@@ -3,8 +3,6 @@ import {useEffect} from "react";
 import {fetchEvents} from "@/redux/event/eventThunks";
 import {useAppDispatch} from "@/hooks/hooks";
 import {useUser} from "@auth0/nextjs-auth0/client";
-import {default as axios} from "axios/index";
-import {GetRole} from "@/app/Auth0";
 
 
 export default function Home() {
