@@ -11,6 +11,7 @@ import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
 import {useDispatch} from "react-redux";
 import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 import LinkText from "@/components/text/LinkText";
+import Link from "next/link";
 
 const navigation = [
     {name: 'events', href: '/events', icon: HomeIcon, current: true}
@@ -38,7 +39,7 @@ export function RootLayout({children}: RootLayoutProps) {
         if(user) {
             dispatch(fetchAuthorization(user.sub as string));
         }
-    },[user])
+    },[isLoading])
 
     if (isLoading)
         return <></>
@@ -112,7 +113,7 @@ export function RootLayout({children}: RootLayoutProps) {
                                                 <ul role="list" className="-mx-2 space-y-1">
                                                     {navigation.map((item) => (
                                                         <li key={item.name}>
-                                                            <a
+                                                            <Link
                                                                 href={item.href}
                                                                 className={classNames(
                                                                     item.current
@@ -124,7 +125,7 @@ export function RootLayout({children}: RootLayoutProps) {
                                                                 <item.icon className="h-6 w-6 shrink-0"
                                                                            aria-hidden="true"/>
                                                                 {item.name}
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -361,7 +362,6 @@ export function RootLayout({children}: RootLayoutProps) {
                     theme="light"
                 />
             </div>
-            <a href="/api/auth/login">Login</a>
         </div>
     );
 }

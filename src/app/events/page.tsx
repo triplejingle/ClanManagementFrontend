@@ -88,10 +88,11 @@ export default function Page() {
                                     <td className="invisible md:visible absolute md:relative whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.eventcode}</td>
                                     <td className="invisible md:visible absolute md:relative whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.startdate?.toString().replace("T", " ")}</td>
                                     <td className="invisible md:visible absolute md:relative whitespace-nowrap px-3 py-4 text-sm text-gray-300">{event.enddate?.toString().replace("T", " ")}</td>
-                                    <td className=" whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                    <td className=" whitespace-nowrap py-4 pl-3 pr-2 text-right text-sm font-medium sm:pr-0">
                                         <LinkText text={"Edit event"} page={"events/" + event.eventid}/>
                                     </td>
-                                    <td className=" whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                    <td className=" whitespace-nowrap py-4 pl-3 pr-4  text-right text-sm font-medium sm:pr-0">
+
                                         <DeleteButton
                                             deleteOnClick={() => deleteOnClick(event.eventid as number, event)}/>
                                     </td>

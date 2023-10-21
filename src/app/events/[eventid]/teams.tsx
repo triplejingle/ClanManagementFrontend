@@ -68,7 +68,7 @@ export default function Teams() {
                         <Link
                             href={eventid + "/" + team.teamid}
                             className="text-indigo-400 hover:text-indigo-200">
-                            {"Edit teams"}
+                            {"Edit team"}
                         </Link>
 
                         <ChevronRightIcon

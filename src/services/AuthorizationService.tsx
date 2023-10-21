@@ -41,7 +41,6 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
 
         return await axios.request(options).then(function (response:{data: Authorization[]}) {
             console.log("get role")
-            console.log(response.data);
             return response.data;
         }).catch(function (error:any) {
             console.error(error);
