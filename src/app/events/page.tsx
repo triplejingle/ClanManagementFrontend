@@ -9,12 +9,14 @@ import React, {useEffect} from "react";
 import {deleteEvent, fetchEvents} from "@/redux/event/eventThunks";
 import DeleteButton from "@/components/button/DeleteButton";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
+import {allEvents} from "@/redux/event/eventAdapter";
+import {selectALlAuthorizations} from "@/redux/authorization/authorizationAdapter";
 
 export default function Page() {
-    const events = useAppSelector((state) => state.reducers.event.events);
+    const events = useAppSelector(allEvents);
     const dispatch = useAppDispatch();
     const toastId: { current: any } = React.useRef();
-
+    const role = useAppSelector(selectALlAuthorizations);
     useEffect(() => {
         dispatch(fetchEvents())
     }, [])
@@ -92,7 +94,6 @@ export default function Page() {
                                         <LinkText text={"Edit event"} page={"events/" + event.eventid}/>
                                     </td>
                                     <td className=" whitespace-nowrap py-4 pl-3 pr-4  text-right text-sm font-medium sm:pr-0">
-
                                         <DeleteButton
                                             deleteOnClick={() => deleteOnClick(event.eventid as number, event)}/>
                                     </td>

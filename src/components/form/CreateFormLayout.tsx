@@ -14,7 +14,14 @@ type CreateFormLayoutProps = {
     schema: yup.ObjectSchema<any>;
     returnUrl: string;
 }
-export default function CreateFormLayout({title, description, children, onSubmit, schema, returnUrl}: CreateFormLayoutProps) {
+export default function CreateFormLayout({
+                                             title,
+                                             description,
+                                             children,
+                                             onSubmit,
+                                             schema,
+                                             returnUrl
+                                         }: CreateFormLayoutProps) {
     const methods = useForm({resolver: yupResolver(schema), defaultValues: {eventid: -1}});
 
     return (

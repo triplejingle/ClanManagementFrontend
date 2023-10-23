@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {People} from "@/domain/people";
 import {createPerson, deletePerson, fetchPersons} from "@/redux/person/personThunks";
+import {personsAdapter} from "@/redux/person/personAdapter";
 
 interface PersonState {
     status: string;
@@ -15,12 +16,13 @@ const initialState: PersonState = {
 
 export const personSlice = createSlice({
     name: 'person',
-    initialState,
+    initialState: personsAdapter.getInitialState(initialState),
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchPersons.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.people = action.payload;
+            console.log("fetch", action.payload)
+            personsAdapter.addMany(state, action.payload)
         })
         builder.addCase(fetchPersons.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -29,9 +31,8 @@ export const personSlice = createSlice({
             state.status = FAILURE_STATUS;
         })
         builder.addCase(createPerson.fulfilled, (state, action) => {
-
             state.status = SUCCESS_STATUS;
-            state.people = [action.payload, ...state.people];
+            personsAdapter.addOne(state, action.payload)
         })
         builder.addCase(createPerson.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -42,7 +43,7 @@ export const personSlice = createSlice({
 
         builder.addCase(deletePerson.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.people = state.people.filter(t => t.personid != action.payload);
+            personsAdapter.removeOne(state, action.payload)
         })
         builder.addCase(deletePerson.pending, (state, action) => {
             state.status = LOADING_STATUS;

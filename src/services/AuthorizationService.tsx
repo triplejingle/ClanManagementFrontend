@@ -4,11 +4,8 @@ import {Authorization} from "@/domain/Role";
 var axios = require("axios").default;
 
 
-
-
-
-export class AuthorizationService extends BaseClanManagementBackendService<string>{
-    GetAccessToken(){
+export class AuthorizationService extends BaseClanManagementBackendService<string> {
+    GetAccessToken() {
         var options = {
             method: 'POST',
             url: 'https://dev-8tnw9yyh.us.auth0.com/oauth/token',
@@ -21,9 +18,9 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
             })
         };
 
-        return axios.request(options).then(function (response:any) {
+        return axios.request(options).then(function (response: any) {
             return response.data.access_token;
-        }).catch(function (error:any) {
+        }).catch(function (error: any) {
             console.error(error);
         });
     }
@@ -39,17 +36,17 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
             headers: {authorization: 'Bearer ' + accessToken}
         };
 
-        return await axios.request(options).then(function (response:{data: Authorization[]}) {
+        return await axios.request(options).then(function (response: { data: Authorization[] }) {
             console.log("get role")
             return response.data;
-        }).catch(function (error:any) {
+        }).catch(function (error: any) {
             console.error(error);
         });
 
     }
 
 
-    async fetchAuthorization(userId:string):Promise<Authorization[]>{
+    async fetchAuthorization(userId: string): Promise<Authorization[]> {
         return await this.GetRole(userId);
     }
 

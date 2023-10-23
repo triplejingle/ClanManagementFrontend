@@ -6,16 +6,14 @@ import authorizationSlice from "@/redux/authorization/authorizationSlice";
 
 
 const reducers = combineReducers({
-    event: eventSlice,
-    team: teamSlice,
-    person: personSlice,
-    authorization: authorizationSlice
+    eventSlice,
+    teamSlice,
+    personSlice,
+    authorizationSlice
 })
 
 export const store = configureStore({
-        reducer: {
-            reducers
-        },
+        reducer: reducers,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: false,

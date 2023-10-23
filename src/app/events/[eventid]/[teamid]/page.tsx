@@ -11,12 +11,12 @@ import {useRouter} from "next/navigation";
 import {IDLE_STATUS} from "@/redux/stateStatus";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 import PersonsOverview from "@/app/events/[eventid]/[teamid]/personsOverview";
+import {selectTeamById} from "@/redux/team/teamAdapter";
 
 
 export default function Page({params}: { params: { eventid: number, teamid: number } }) {
-    const team = useAppSelector((state) =>
-        state.reducers.team.teams.find(t => t.teamid == params.teamid));
-    const teamState = useAppSelector((state) => state.reducers.team.status);
+    const team = useAppSelector((state) => selectTeamById(state, params.teamid));
+    const teamState = useAppSelector((state) => state.teamSlice.status);
     const dispatch = useAppDispatch();
     const router = useRouter();
     const toastId: any = React.useRef();

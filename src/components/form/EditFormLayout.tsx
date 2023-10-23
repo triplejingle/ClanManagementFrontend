@@ -16,7 +16,15 @@ type EditFormLayoutProps = {
     defaultValues: {};
     returnUrl: string;
 }
-export default function EditFormLayout({title, description, children, onSubmit, schema, defaultValues, returnUrl}: EditFormLayoutProps) {
+export default function EditFormLayout({
+                                           title,
+                                           description,
+                                           children,
+                                           onSubmit,
+                                           schema,
+                                           defaultValues,
+                                           returnUrl
+                                       }: EditFormLayoutProps) {
     const methods = useForm({resolver: yupResolver(schema), defaultValues: defaultValues});
 
     return (

@@ -14,17 +14,19 @@ export const fetchTeams = createAsyncThunk(
         }
     }
 )
-interface createTeamProps{
+
+interface createTeamProps {
     eventid: number;
-    team:Team;
+    team: Team;
 }
+
 export const createTeam = createAsyncThunk(
     "teams/create",
-    async (data:createTeamProps, {rejectWithValue})=>{
-        const response = await teamService.createTeam(data.eventid,data.team);
-        if(response != null){
+    async (data: createTeamProps, {rejectWithValue}) => {
+        const response = await teamService.createTeam(data.eventid, data.team);
+        if (response != null) {
             return response;
-        }else{
+        } else {
             return rejectWithValue(response);
         }
     }
@@ -36,8 +38,8 @@ export const updateTeam = createAsyncThunk(
     async (data: Team, thunkAPI) => {
         let newTeam = {...data} as Team;
 
-        const response = await teamService.updateTeam(data.teamid as number,newTeam);
-        if(response != null){
+        const response = await teamService.updateTeam(data.teamid as number, newTeam);
+        if (response != null) {
             return response;
         } else {
             return thunkAPI.rejectWithValue(response);
@@ -47,11 +49,11 @@ export const updateTeam = createAsyncThunk(
 
 export const deleteTeam = createAsyncThunk(
     "teams/delete",
-    async (id: number, {rejectWithValue})=>{
+    async (id: number, {rejectWithValue}) => {
         const response = await teamService.deleteTeam(id);
-        if(response != null){
+        if (response != null) {
             return response;
-        }else{
+        } else {
             return rejectWithValue(response)
         }
     }

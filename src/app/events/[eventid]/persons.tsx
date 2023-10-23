@@ -2,6 +2,7 @@ import React from "react";
 import {useAppSelector} from "@/hooks/hooks";
 import Link from "next/link";
 import {Team} from "@/domain/team";
+import {selectAllPersons} from "@/redux/person/personAdapter";
 
 interface PersonProps {
     team: Team;
@@ -9,9 +10,10 @@ interface PersonProps {
 
 export default function Persons({team}: PersonProps) {
 
-    const participants =
-        useAppSelector((state) => state.reducers.person.people.filter(t => t.teamid == team.teamid));
 
+    // @ts-ignore
+    const participants = useAppSelector((state) => selectAllPersons(state));
+    console.log(participants)
     return (
         <div>
             <div className="flex items-center gap-x-3">
@@ -21,13 +23,13 @@ export default function Persons({team}: PersonProps) {
                         <span
                             className="invisible md:visible absolute md:relative text-gray-400">|</span>
                         <span
-                            className="invisible md:visible absolute md:relative whitespace-nowrap text-gray-400 ">Teamsize: {participants.length}</span>
+                            className="invisible md:visible absolute md:relative whitespace-nowrap text-gray-400 ">Teamsize: {participants.filter(t => t.teamid == team.teamid).length}</span>
                     </Link>
                 </h2>
             </div>
             <div
                 className={"mt-3 flex flex-row flex-wrap gap-x-2.5 text-xs leading-5 text-gray-400 "}>
-                {participants.map((person) => (
+                {participants && participants.filter(t => t.teamid == team.teamid).map((person) => (
                     <div className={"flex items-center gap-x-2.5 text-xs text-gray-400 "}
                          key={person.name}>
                         <svg viewBox="0 0 2 2" className="h-2 w-2 flex-none fill-red-300">

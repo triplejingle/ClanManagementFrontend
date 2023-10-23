@@ -1,12 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
-
-import {createEvent, deleteEvent, fetchEvents, updateEvent} from "@/redux/event/eventThunks";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
-import {Event} from '@/domain/event'
-
-import React from "react";
 import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
 import {Authorization} from "@/domain/Role";
+import {authorizationsAdapter} from "@/redux/authorization/authorizationAdapter";
 
 
 interface AuthorizationState {
@@ -21,12 +17,12 @@ const initialState: AuthorizationState = {
 
 export const authorizationSlice = createSlice({
     name: 'authorization',
-    initialState,
+    initialState: authorizationsAdapter.getInitialState(initialState),
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchAuthorization.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.roles = [... action.payload];
+            authorizationsAdapter.addMany(state, action.payload)
         })
         builder.addCase(fetchAuthorization.pending, (state, action) => {
             state.status = LOADING_STATUS;

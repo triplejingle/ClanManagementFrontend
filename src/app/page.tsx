@@ -7,10 +7,10 @@ import {useUser} from "@auth0/nextjs-auth0/client";
 
 export default function Home() {
     const dispatch = useAppDispatch();
-    const { user, error, isLoading } = useUser();
+    const {user, error, isLoading} = useUser();
     useEffect(() => {
 
-            dispatch(fetchEvents())
+        dispatch(fetchEvents())
 
     }, [])
 
@@ -20,8 +20,8 @@ export default function Home() {
 
 
     return (
-    <main className={"ml-10"}>
-        <div>Welcome {user?.name}</div>
-    </main>
-  )
+        <main className={"ml-10"}>
+            <div>Welcome {user?.name}</div>
+        </main>
+    )
 }

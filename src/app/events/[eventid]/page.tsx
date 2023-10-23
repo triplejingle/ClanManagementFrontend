@@ -13,14 +13,14 @@ import {Event, eventSchema} from "@/domain/event";
 import {updateEvent} from "@/redux/event/eventThunks";
 import EditFormLayout from "@/components/form/EditFormLayout";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
+import {selectEventById} from "@/redux/event/eventAdapter";
 
 export default function Page() {
 
     const dispatch = useAppDispatch();
     const router = useRouter()
     const params = useParams();
-    const event = useAppSelector((state) => state.reducers.event.events.find(
-        (e: Event) => e.eventid?.toString() == params.eventid))
+    const event = useAppSelector((state) => selectEventById(state, params.eventid as string));
     const toastId: any = React.useRef();
 
     function onSubmit(event: Event) {

@@ -10,6 +10,7 @@ import DeleteButton from "@/components/button/DeleteButton";
 import LinkButton from "@/components/button/LinkButton";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 import {fetchPersons} from "@/redux/person/personThunks";
+import {selectAllTeams} from "@/redux/team/teamAdapter";
 
 
 export default function Teams() {
@@ -17,13 +18,13 @@ export default function Teams() {
     const eventid: number = parseInt(params.eventid as string);
     const dispatch = useAppDispatch();
     const teams =
-        useAppSelector((state) => state.reducers.team.teams.filter(t => t.eventid == eventid));
-    const teamsState = useAppSelector((state) => state.reducers.team.status);
+        useAppSelector((state) => selectAllTeams(state));
+    const teamsState = useAppSelector((state) => state.teamSlice.status);
     const toastId: any = React.useRef();
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(fetchPersons({eventid}))
-    },[])
+    }, [])
     useEffect(() => {
         if (teamsState == IDLE_STATUS) {
             dispatch(fetchTeams());
@@ -59,8 +60,9 @@ export default function Teams() {
                 </div>
             </div>
             <ul role="list" className="divide-y divide-white/5">
-                {teams.map((team) => (
+                {teams && teams.filter(t => t.eventid == eventid).map((team) => (
                     <li key={team.teamid} className="relative flex items-center space-x-4 py-4">
+
                         <div className="min-w-0 flex-auto">
 
                             <Persons team={team}/>

@@ -28,7 +28,7 @@ export default class BaseClanManagementBackendService<T> {
             })
     }
 
-    async delete(url: string): Promise<number>{
+    async delete(url: string): Promise<number> {
         return await this.axios.delete(this.serverUrl.concat(url))
             .then((response: any) => {
                 return response.data

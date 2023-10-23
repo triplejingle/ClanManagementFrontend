@@ -2,7 +2,8 @@ import BaseClanManagementBackendService from "@/services/BaseClanManagementBacke
 import {Event} from '@/domain/event'
 
 export class EventService extends BaseClanManagementBackendService<Event> {
-    url= "/events";
+    url = "/events";
+
     async createEvent(data: Event): Promise<Event> {
         return await this.create(this.url, data);
     }
@@ -12,10 +13,10 @@ export class EventService extends BaseClanManagementBackendService<Event> {
     }
 
     async updateEvent(event: Event): Promise<Event> {
-        return this.update(this.url +"/"+ event.eventid?.toString(), event);
+        return this.update(this.url + "/" + event.eventid?.toString(), event);
     }
 
-    async deleteEvent(id: number){
-        return this.delete(this.url+"/"+id);
+    async deleteEvent(id: number) {
+        return this.delete(this.url + "/" + id);
     }
 }

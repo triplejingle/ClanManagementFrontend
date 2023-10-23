@@ -1,10 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, Update} from "@reduxjs/toolkit";
 
 import {createEvent, deleteEvent, fetchEvents, updateEvent} from "@/redux/event/eventThunks";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {Event} from '@/domain/event'
-
-import React from "react";
+import {eventsAdapter} from "@/redux/event/eventAdapter";
 
 
 interface EventState {
@@ -19,12 +18,13 @@ const initialState: EventState = {
 
 export const eventSlice = createSlice({
     name: 'event',
-    initialState,
+    initialState: eventsAdapter.getInitialState(initialState),
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(createEvent.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.events = [...state.events, action.payload];
+            eventsAdapter.addOne(state, action.payload)
+            // state.events = [...state.events, action.payload];
         })
         builder.addCase(createEvent.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -34,7 +34,8 @@ export const eventSlice = createSlice({
         })
         builder.addCase(fetchEvents.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS
-            state.events = action.payload;
+            // state.events = action.payload;
+            eventsAdapter.addMany(state, action.payload)
         })
         builder.addCase(fetchEvents.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -43,10 +44,14 @@ export const eventSlice = createSlice({
             state.status = FAILURE_STATUS;
         })
         builder.addCase(updateEvent.fulfilled, (state, action) => {
-            const updatedEvent = action.payload;
             state.status = SUCCESS_STATUS;
-            const newEvents = state.events.filter(event => event.eventid != updatedEvent.eventid);
-            state.events = [...newEvents, updatedEvent]
+            const updateSubmission: Update<Event> = {
+                id: action.payload.eventid,
+                changes: {...action.payload}
+            }
+            delete updateSubmission.changes.eventid;
+            // @ts-ignore
+            eventsAdapter.updateOne(state, updateSubmission)
         })
         builder.addCase(updateEvent.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -54,18 +59,16 @@ export const eventSlice = createSlice({
         builder.addCase(updateEvent.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
-        builder.addCase(deleteEvent.fulfilled, (state, action)=>{
-            console.log("fulfilled")
+        builder.addCase(deleteEvent.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            const filteredEvents = state.events.filter(e=>e.eventid!=action.payload);
-            state.events = filteredEvents;
+            const filteredEvents = state.events.filter(e => e.eventid != action.payload);
+            // @ts-ignore
+            eventsAdapter.removeOne(state, filteredEvents);
         })
-        builder.addCase(deleteEvent.pending, (state, action)=>{
-            console.log( "idle")
-          state.status = LOADING_STATUS;
+        builder.addCase(deleteEvent.pending, (state, action) => {
+            state.status = LOADING_STATUS;
         })
-        builder.addCase(deleteEvent.rejected, (state, action)=>{
-            console.log("rejected")
+        builder.addCase(deleteEvent.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
     }

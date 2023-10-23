@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 import {createPerson, deletePerson, fetchPersons} from "@/redux/person/personThunks";
 import {People} from "@/domain/people";
+import {selectAllPersons} from "@/redux/person/personAdapter";
 
 interface PersonProps {
     eventid: number;
@@ -12,12 +13,12 @@ interface PersonProps {
 
 export default function PersonsOverview({eventid, teamid}: PersonProps) {
     const person =
-        useAppSelector((state) => state.reducers.person.people.filter(p => p.teamid == teamid));
+        useAppSelector((state) => selectAllPersons(state));
     const toastId: any = React.useRef();
     const dispatch = useAppDispatch();
 
     const [username, setUsername] = useState("");
-    const personState = useAppSelector((state) => state.reducers.person.status)
+    const personState = useAppSelector((state) => state.personSlice.status)
     useEffect(() => {
         dispatch(fetchPersons({eventid}))
     }, [personState])
@@ -84,13 +85,10 @@ export default function PersonsOverview({eventid, teamid}: PersonProps) {
                             Add
                         </button>
                     </div>
-
                 </div>
-
-
             </div>
             <ul role="list" className="divide-y divide-white/5">
-                {person.map((person) => (
+                {person && person.filter(p => p.teamid == teamid).map((person) => (
                     <li key={person.personid} className="relative flex items-center space-x-4 py-4">
                         <div className="min-w-0 flex-auto">
                             <div className="flex items-center gap-x-3">

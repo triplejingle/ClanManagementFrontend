@@ -2,24 +2,25 @@ import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import React, {Fragment} from "react";
 import {useUser} from "@auth0/nextjs-auth0/client";
-import {useRouter} from "next/navigation";
+
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
-export default function ProfileDropDown(){
+
+export default function ProfileDropDown() {
     const userNavigation = [
         {name: 'Sign out', href: "/api/auth/logout"},
     ]
     const {user, error, isLoading} = useUser();
-    if(isLoading)
+    if (isLoading)
         return <></>
-    if(!user)
+    if (!user)
         return <></>
 
-    return ( <Menu as="div" className="relative">
+    return (<Menu as="div" className="relative">
         <Menu.Button className="-m-1.5 flex items-center p-1.5">
             <span className="sr-only">Open user menu</span>
-            {user&&<img
+            {user && <img
                 className="h-8 w-8 rounded-full bg-gray-50"
                 src={user.picture!}
                 alt={user.name!}

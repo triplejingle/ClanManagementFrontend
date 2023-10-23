@@ -1,9 +1,8 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, Update} from "@reduxjs/toolkit";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {Team} from "@/domain/team";
-import {fetchEvents} from "@/redux/event/eventThunks";
 import {createTeam, deleteTeam, fetchTeams, updateTeam} from "@/redux/team/teamThunks";
-import {act} from "react-dom/test-utils";
+import {teamsAdapter} from "@/redux/team/teamAdapter";
 
 interface TeamState {
     status: string;
@@ -17,22 +16,22 @@ const initialState: TeamState = {
 
 export const teamSlice = createSlice({
     name: 'team',
-    initialState,
+    initialState: teamsAdapter.getInitialState(initialState),
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(createTeam.fulfilled, (state, action)=>{
+        builder.addCase(createTeam.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.teams = [action.payload, ...state.teams];
+            teamsAdapter.addOne(state, action.payload);
         })
-        builder.addCase(createTeam.pending, (state, action)=>{
+        builder.addCase(createTeam.pending, (state, action) => {
             state.status = LOADING_STATUS;
         })
-        builder.addCase(createTeam.rejected, (state, action)=>{
+        builder.addCase(createTeam.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
         builder.addCase(fetchTeams.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            state.teams = action.payload;
+            teamsAdapter.addMany(state, action.payload);
         })
         builder.addCase(fetchTeams.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -43,23 +42,28 @@ export const teamSlice = createSlice({
 
         builder.addCase(updateTeam.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            const newTeams = state.teams.filter(t=>t.teamid!=action.payload.teamid);
-            state.teams = [action.payload,...newTeams];
-        })
-        builder.addCase(updateTeam.pending, (state, action)=>{
-            state.status = LOADING_STATUS;
-        })
-        builder.addCase(updateTeam.rejected, (state, action)=>{
-            state.status= FAILURE_STATUS;
-        })
-        builder.addCase(deleteTeam.fulfilled, (state, action)=>{
             state.status = SUCCESS_STATUS;
-            state.teams=state.teams.filter(t=>t.teamid!=action.payload);
+            const updateSubmission: Update<Team> = {
+                id: action.payload.teamid,
+                changes: {...action.payload}
+            }
+            delete updateSubmission.changes.teamid;
+            teamsAdapter.updateOne(state, updateSubmission);
         })
-        builder.addCase(deleteTeam.pending, (state, action)=>{
+        builder.addCase(updateTeam.pending, (state, action) => {
             state.status = LOADING_STATUS;
         })
-        builder.addCase(deleteTeam.rejected, (state, action)=>{
+        builder.addCase(updateTeam.rejected, (state, action) => {
+            state.status = FAILURE_STATUS;
+        })
+        builder.addCase(deleteTeam.fulfilled, (state, action) => {
+            state.status = SUCCESS_STATUS;
+            teamsAdapter.removeOne(state, action.payload);
+        })
+        builder.addCase(deleteTeam.pending, (state, action) => {
+            state.status = LOADING_STATUS;
+        })
+        builder.addCase(deleteTeam.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
     }
