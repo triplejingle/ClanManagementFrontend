@@ -13,7 +13,7 @@ export default function Persons({team}: PersonProps) {
 
     // @ts-ignore
     const participants = useAppSelector((state) => selectAllPersons(state));
-    console.log(participants)
+
     return (
         <div>
             <div className="flex items-center gap-x-3">

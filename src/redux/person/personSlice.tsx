@@ -21,7 +21,6 @@ export const personSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchPersons.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            console.log("fetch", action.payload)
             personsAdapter.addMany(state, action.payload)
         })
         builder.addCase(fetchPersons.pending, (state, action) => {

@@ -31,7 +31,7 @@ export function RootLayout({children}: RootLayoutProps) {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const role = useAppSelector(selectALlAuthorizations);
-    console.log(role)
+
     useEffect(() => {
         if (user && role.length == 0) {
             dispatch(fetchAuthorization(user.sub as string));

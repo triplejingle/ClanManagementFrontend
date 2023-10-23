@@ -28,8 +28,6 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
     async GetRole(userId: string): Promise<Authorization[]> {
         var axios = require("axios").default;
         const accessToken = await this.GetAccessToken()
-        console.log("getAccesstoken")
-        console.log(accessToken);
         var options = {
             method: 'GET',
             url: "https://dev-8tnw9yyh.us.auth0.com/api/v2/users/" + userId + "/roles",
@@ -37,7 +35,6 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
         };
 
         return await axios.request(options).then(function (response: { data: Authorization[] }) {
-            console.log("get role")
             return response.data;
         }).catch(function (error: any) {
             console.error(error);
