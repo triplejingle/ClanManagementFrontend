@@ -1,4 +1,4 @@
-"use client"
+
 import {useFormContext} from "react-hook-form";
 import React, {useEffect, useRef} from "react";
 import BaseTextInput from "@/components/input/BaseTextInput";

@@ -1,5 +1,5 @@
 import BaseClanManagementBackendService from "@/services/BaseClanManagementBackendService";
-import {Authorization} from "@/domain/Role";
+import {Authorization} from "@/domain/role";
 
 var axios = require("axios").default;
 
@@ -46,6 +46,4 @@ export class AuthorizationService extends BaseClanManagementBackendService<strin
     async fetchAuthorization(userId: string): Promise<Authorization[]> {
         return await this.GetRole(userId);
     }
-
-
 }

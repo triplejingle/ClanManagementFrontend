@@ -12,7 +12,7 @@ function BaseTextInput({name, className, hidden}: BaseTextInputProps) {
     return (
         <input
             hidden={hidden}
-
+            data-cy={name}
             {...register(name)}
             type="text"
             name={name}

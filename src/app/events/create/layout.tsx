@@ -1,5 +1,6 @@
 'use client'
 
+
 import CreateFormLayout from "@/components/form/CreateFormLayout";
 import {Event, eventSchema} from "@/domain/event";
 import {useAppDispatch} from "@/hooks/hooks";
@@ -16,7 +17,8 @@ export default function Layout({children}: LayoutProps) {
     const dispatch = useAppDispatch();
     const router = useRouter()
     const toastId: any = React.useRef();
-    const onSubmit = (data: Event) => {
+    const onSubmit = async (data: Event) => {
+
         IdleToast({toastId: toastId});
         dispatch(createEvent(data)).then((test) => {
             if (createEvent.fulfilled.type == test.type) {

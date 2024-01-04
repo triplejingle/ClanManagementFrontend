@@ -5,7 +5,6 @@ import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/red
 import {Event} from '@/domain/event'
 import {eventsAdapter} from "@/redux/event/eventAdapter";
 
-
 interface EventState {
     status: string;
     events: Event[]
@@ -24,7 +23,6 @@ export const eventSlice = createSlice({
         builder.addCase(createEvent.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
             eventsAdapter.addOne(state, action.payload)
-            // state.events = [...state.events, action.payload];
         })
         builder.addCase(createEvent.pending, (state, action) => {
             state.status = LOADING_STATUS;
@@ -46,11 +44,10 @@ export const eventSlice = createSlice({
         builder.addCase(updateEvent.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
             const updateSubmission: Update<Event> = {
-                id: action.payload.eventid,
+                id: action.payload.eventid!,
                 changes: {...action.payload}
             }
             delete updateSubmission.changes.eventid;
-            // @ts-ignore
             eventsAdapter.updateOne(state, updateSubmission)
         })
         builder.addCase(updateEvent.pending, (state, action) => {
@@ -61,9 +58,7 @@ export const eventSlice = createSlice({
         })
         builder.addCase(deleteEvent.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
-            const filteredEvents = state.events.filter(e => e.eventid != action.payload);
-            // @ts-ignore
-            eventsAdapter.removeOne(state, filteredEvents);
+            eventsAdapter.removeOne(state, action.payload);
         })
         builder.addCase(deleteEvent.pending, (state, action) => {
             state.status = LOADING_STATUS;

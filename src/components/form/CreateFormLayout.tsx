@@ -1,4 +1,4 @@
-import CancelButton from "@/components/button/CancelButton";
+import BackButton from "@/components/button/BackButton";
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import * as yup from "yup"
@@ -32,7 +32,7 @@ export default function CreateFormLayout({
                     description={description}
                     buttons={
                         <div className="mt-6 flex items-center justify-end gap-x-6">
-                            <CancelButton page={returnUrl}/>
+                            <BackButton page={returnUrl}/>
                             <CreateButton/>
                         </div>
                     }

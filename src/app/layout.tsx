@@ -40,12 +40,13 @@ export default function Layout({
     return (
         <ProvidersComponent>
             <html lang="en">
-            <UserProvider>
+
                 <head>
                     <meta name="description" content="Bingo application">
                     </meta>
                     <title>BE Active NL clan</title>
                 </head>
+                <UserProvider>
                 <body className={inter.className}>
                 <div>
                     <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -82,11 +83,12 @@ export default function Layout({
                                             leaveFrom="opacity-100"
                                             leaveTo="opacity-0"
                                         >
-                                            <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                                                <button type="button" className="-m-2.5 p-2.5"
+                                            <div className="absolute left-full top-0 flex w-16 justify-center pt-5"     >
+                                                <button type="button" className="-m-2.5 p-2.5" data-cy={"navigationMenuClose"}
+
                                                         onClick={() => setSidebarOpen(false)}>
                                                     <span className="sr-only">Close sidebar</span>
-                                                    <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true"/>
+                                                    <XMarkIcon  className="h-6 w-6 text-white" aria-hidden="true"/>
                                                 </button>
                                             </div>
                                         </Transition.Child>
@@ -105,8 +107,9 @@ export default function Layout({
                                                     <li>
                                                         <ul role="list" className="-mx-2 space-y-1">
                                                             {navigation.map((item) => (
-                                                                <li key={item.name}>
+                                                                <li key={item.name} >
                                                                     <Link
+                                                                        data-cy={item.name}
                                                                         href={item.href}
                                                                         className={classNames(
                                                                             item.current
@@ -243,7 +246,7 @@ export default function Layout({
                     <div className="lg:pl-72 max-h-full">
                         <div
                             className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-                            <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+                            <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden"  data-cy={"navigationMenu"}
                                     onClick={() => setSidebarOpen(true)}>
                                 <span className="sr-only">Open sidebar</span>
                                 <Bars3Icon className="h-6 w-6" aria-hidden="true"/>
@@ -343,14 +346,12 @@ export default function Layout({
                             </div>
                         </main>
                         <ToastContainer
-                            position="top-right"
-                            autoClose={5000}
+                            position="top-left"
                             hideProgressBar={false}
-                            newestOnTop={false}
+                            newestOnTop={true}
                             closeOnClick
                             rtl={false}
                             pauseOnFocusLoss
-                            draggable
                             pauseOnHover
                             theme="light"
                         />

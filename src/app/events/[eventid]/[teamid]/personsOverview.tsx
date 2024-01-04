@@ -5,6 +5,7 @@ import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToa
 import {createPerson, deletePerson, fetchPersons} from "@/redux/person/personThunks";
 import {People} from "@/domain/people";
 import {selectAllPersons} from "@/redux/person/personAdapter";
+import {IDLE_STATUS} from "@/redux/stateStatus";
 
 interface PersonProps {
     eventid: number;
@@ -20,7 +21,9 @@ export default function PersonsOverview({eventid, teamid}: PersonProps) {
     const [username, setUsername] = useState("");
     const personState = useAppSelector((state) => state.personSlice.status)
     useEffect(() => {
-        dispatch(fetchPersons({eventid}))
+        if(personState==IDLE_STATUS) {
+            dispatch(fetchPersons({eventid}))
+        }
     }, [personState])
 
     function deleteOnClick(id: number, teamName: string) {

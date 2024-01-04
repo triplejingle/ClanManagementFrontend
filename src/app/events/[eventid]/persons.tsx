@@ -10,8 +10,6 @@ interface PersonProps {
 
 export default function Persons({team}: PersonProps) {
 
-
-    // @ts-ignore
     const participants = useAppSelector((state) => selectAllPersons(state));
 
     return (

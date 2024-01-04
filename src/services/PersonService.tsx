@@ -4,7 +4,7 @@ import {People} from "@/domain/people";
 
 export class PersonService extends BaseClanManagementBackendService<People> {
     async fetchPersons(eventid: number): Promise<People[]> {
-        return this.fetch("event/" + eventid + "/persons");
+        return this.fetch("persons");
     }
 
     async deletePerson(id: number) {

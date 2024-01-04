@@ -3,13 +3,15 @@ import eventSlice from "@/redux/event/eventSlice";
 import teamSlice from "@/redux/team/teamSlice";
 import personSlice from "@/redux/person/personSlice";
 import authorizationSlice from "@/redux/authorization/authorizationSlice";
+import eventRuleSlice from "@/redux/eventrule/eventruleslice";
 
 
 const reducers = combineReducers({
     eventSlice,
     teamSlice,
     personSlice,
-    authorizationSlice
+    authorizationSlice,
+    eventRuleSlice
 })
 
 export const store = configureStore({

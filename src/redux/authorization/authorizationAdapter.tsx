@@ -1,6 +1,6 @@
 import {createEntityAdapter} from "@reduxjs/toolkit";
 import {RootState} from "@/redux/clanmanagementstore";
-import {Authorization} from "@/domain/Role";
+import {Authorization} from "@/domain/role";
 
 export const authorizationsAdapter = createEntityAdapter<Authorization>({})
 

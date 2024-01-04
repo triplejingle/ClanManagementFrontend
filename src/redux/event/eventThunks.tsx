@@ -25,8 +25,7 @@ export const updateEvent = createAsyncThunk(
     'event/update',
     async (event: Event, {rejectWithValue}) => {
         try {
-            var response = await eventService.updateEvent(event);
-            return response
+            return await eventService.updateEvent(event);
         } catch (e) {
             return rejectWithValue(e);
         }
@@ -37,8 +36,7 @@ export const deleteEvent = createAsyncThunk(
     'event/delete',
     async (eventId: number, {rejectWithValue}) => {
         try {
-            const response = await eventService.deleteEvent(eventId);
-            return response
+            return await eventService.deleteEvent(eventId);
         } catch (e) {
             return rejectWithValue(e);
         }

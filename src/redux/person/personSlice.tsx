@@ -18,7 +18,6 @@ export const personSlice = createSlice({
     name: 'person',
     initialState: personsAdapter.getInitialState(initialState),
     reducers: {},
-
     extraReducers: (builder) => {
         builder.addCase(fetchPersons.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
@@ -30,6 +29,7 @@ export const personSlice = createSlice({
         builder.addCase(fetchPersons.rejected, (state, action) => {
             state.status = FAILURE_STATUS;
         })
+
         builder.addCase(createPerson.fulfilled, (state, action) => {
             state.status = SUCCESS_STATUS;
             personsAdapter.addOne(state, action.payload)
@@ -53,6 +53,5 @@ export const personSlice = createSlice({
         })
     }
 })
-
 
 export default personSlice.reducer

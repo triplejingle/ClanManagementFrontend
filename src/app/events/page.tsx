@@ -11,15 +11,19 @@ import DeleteButton from "@/components/button/DeleteButton";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 import {allEvents} from "@/redux/event/eventAdapter";
 import {selectALlAuthorizations} from "@/redux/authorization/authorizationAdapter";
+import {IDLE_STATUS} from "@/redux/stateStatus";
 
 export default function Page() {
     const events = useAppSelector(allEvents);
     const dispatch = useAppDispatch();
     const toastId: { current: any } = React.useRef();
     const role = useAppSelector(selectALlAuthorizations);
+    const eventState = useAppSelector((state) => state.eventSlice.status)
     useEffect(() => {
-        dispatch(fetchEvents())
-    }, [])
+        if (eventState == IDLE_STATUS) {
+            dispatch(fetchEvents())
+        }
+    }, [eventState])
 
     function deleteOnClick(id: number, event: Event) {
         IdleToast({toastId: toastId});
@@ -38,7 +42,8 @@ export default function Page() {
             }
         })
     }
-
+    if(!events)
+        return <></>
     return (<div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">

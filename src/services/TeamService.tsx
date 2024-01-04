@@ -15,6 +15,6 @@ export class TeamService extends BaseClanManagementBackendService<Team> {
     }
 
     async createTeam(eventid: number, data: Team) {
-        return this.create("/events/" + eventid + "/teams", data);
+        return this.create("events/" + eventid + "/teams", data);
     }
 }

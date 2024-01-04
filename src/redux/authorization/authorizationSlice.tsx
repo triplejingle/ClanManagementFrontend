@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {FAILURE_STATUS, IDLE_STATUS, LOADING_STATUS, SUCCESS_STATUS} from "@/redux/stateStatus";
 import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
-import {Authorization} from "@/domain/Role";
+import {Authorization} from "@/domain/role";
 import {authorizationsAdapter} from "@/redux/authorization/authorizationAdapter";
 
 

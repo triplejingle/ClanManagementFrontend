@@ -18,7 +18,7 @@ export function SuccessToast({toastId, message}: ToastProps) {
     function showToast() {
         toastId.current = toast.update(toastId.current, {
             type: toast.TYPE.SUCCESS,
-            autoClose: 5000,
+            toastId: "successToast",
             render: message ? message : "Success"
         })
     }
@@ -30,7 +30,7 @@ export function ErrorToast({toastId, message}: ToastProps) {
     function showToast() {
         toastId.current = toast.update(toastId.current, {
             type: toast.TYPE.ERROR,
-            autoClose: 5000,
+            toastId: "errorToast",
             render: message ? message : "Something went wrong"
         })
     }

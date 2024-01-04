@@ -5,12 +5,13 @@ interface CancelButtonProps {
     page: string;
 }
 
-export default function CancelButton({page}: CancelButtonProps) {
+export default function BackButton({page}: CancelButtonProps) {
 
     return (
         <Link href={page}>
             <button
                 type="button"
+                data-cy="cancel"
                 className="text-sm font-semibold leading-6 text-white"
             >
                 Back

@@ -6,6 +6,7 @@ import {useRouter} from "next/navigation";
 import {fetchAuthorization} from "@/redux/authorization/authorizationThunks";
 import {useAppDispatch, useAppSelector} from "@/hooks/hooks";
 import {selectALlAuthorizations} from "@/redux/authorization/authorizationAdapter";
+import Link from "next/link";
 
 const navigation = [
     {name: 'events', href: 'events', icon: HomeIcon, current: true}
@@ -26,9 +27,7 @@ type RootLayoutProps = {
 }
 
 export function RootLayout({children}: RootLayoutProps) {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
     const {user, error, isLoading} = useUser();
-    const router = useRouter();
     const dispatch = useAppDispatch();
     const role = useAppSelector(selectALlAuthorizations);
 
@@ -38,23 +37,9 @@ export function RootLayout({children}: RootLayoutProps) {
         }
     }, [isLoading])
 
-    if (isLoading)
-        return <>Loading please wait</>
-    if (!user) {
-        router.push("/api/auth/login");
-        return <>Not logged in redirecting to login</>
-    }
-    if (role.length == 0)
-        return <></>
-
-    if (role.find(r => r.name == "Admin") == undefined) {
-        return <a href={"/api/auth/logout"}>401 No Access Allowed click here to logout. Wait to get access or check your
-            mail to verify your email.</a>
-    }
-
     return (
-        <main className="py-10 ">
-            <div className="px-4 sm:px-6 lg:px-8 ">
+       <main className="py-10 ">
+           <div className="px-4 sm:px-6 lg:px-8 ">
                 <div className="bg-gray-900 rounded-lg">
                     <div className="mx-auto max-w-7xl">
                         <div className="bg-gray-900 py-10 ">
@@ -63,6 +48,7 @@ export function RootLayout({children}: RootLayoutProps) {
                     </div>
                 </div>
             </div>
+           {/*{!user&&<Link href="/api/auth/login">Click here to login</Link>}*/}
         </main>
     );
 }

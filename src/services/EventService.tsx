@@ -2,7 +2,7 @@ import BaseClanManagementBackendService from "@/services/BaseClanManagementBacke
 import {Event} from '@/domain/event'
 
 export class EventService extends BaseClanManagementBackendService<Event> {
-    url = "/events";
+    url = "events";
 
     async createEvent(data: Event): Promise<Event> {
         return await this.create(this.url, data);

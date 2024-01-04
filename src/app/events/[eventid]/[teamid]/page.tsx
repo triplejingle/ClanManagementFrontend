@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect} from "react";
+import React, {useDebugValue, useEffect} from "react";
 
 
 import EditFormLayout from "@/components/form/EditFormLayout";
@@ -25,7 +25,7 @@ export default function Page({params}: { params: { eventid: number, teamid: numb
             dispatch(fetchTeams());
         }
     }, [teamState])
-
+    useDebugValue(true ? 'Online' : 'Offline');
     function onSubmit(newData: Team) {
         IdleToast({toastId: toastId});
         dispatch(updateTeam(newData)).then((test) => {

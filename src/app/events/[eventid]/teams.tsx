@@ -11,6 +11,7 @@ import LinkButton from "@/components/button/LinkButton";
 import {ErrorToast, IdleToast, SuccessToast} from "@/components/toast/SuccessToast";
 import {fetchPersons} from "@/redux/person/personThunks";
 import {selectAllTeams} from "@/redux/team/teamAdapter";
+import BackButton from "@/components/button/BackButton";
 
 
 export default function Teams() {
@@ -50,7 +51,7 @@ export default function Teams() {
     }
 
     return (
-        <div className={"py-5"}>
+        <div className={"grid grid-cols-1  py-10 px-5"}>
             <div className={"flex justify-between"}>
                 <h2 className=" text-base font-semibold leading-7 text-white ">
                     Participants organized by team
@@ -61,10 +62,8 @@ export default function Teams() {
             </div>
             <ul role="list" className="divide-y divide-white/5">
                 {teams && teams.filter(t => t.eventid == eventid).map((team) => (
-                    <li key={team.teamid} className="relative flex items-center space-x-4 py-4">
-
+                    <li key={team.teamid} className="relative flex items-center space-x-4 py-4 ">
                         <div className="min-w-0 flex-auto">
-
                             <Persons team={team}/>
                         </div>
                         <Link
@@ -73,14 +72,14 @@ export default function Teams() {
                             {"Edit team"}
                         </Link>
 
-                        <ChevronRightIcon
-                            className="invisible md:visible absolute md:relative h-5 w-5 flex-none text-gray-400"
-                            aria-hidden="true"/>
+
                         <DeleteButton deleteOnClick={() => deleteOnClick(team.teamid as number, team.name)}/>
                     </li>
-
                 ))}
             </ul>
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+                <BackButton page={"/events"}/>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import CancelButton from "@/components/button/CancelButton";
+import BackButton from "@/components/button/BackButton";
 import SaveButton from "@/components/button/SaveButton";
 import React from "react";
 
@@ -35,7 +35,7 @@ export default function EditFormLayout({
                     description={description}
                     buttons={
                         <div className="mt-6 flex items-center justify-end gap-x-6">
-                            <CancelButton page={returnUrl}/>
+                            <BackButton page={returnUrl}/>
                             <SaveButton/>
                         </div>
                     }
